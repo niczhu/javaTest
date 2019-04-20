@@ -1,5 +1,5 @@
 package com.test.aop;
 
-public interface AopTest {
+public interface XmlTest {
 	public void test();
 }

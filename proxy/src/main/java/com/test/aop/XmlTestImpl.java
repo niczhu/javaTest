@@ -1,6 +1,6 @@
 package com.test.aop;
 
-public class AopTestImpl implements AopTest {
+public class XmlTestImpl implements XmlTest {
 
 	@Override
 	public void test() {
