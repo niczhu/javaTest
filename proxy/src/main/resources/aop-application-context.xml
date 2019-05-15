@@ -4,5 +4,5 @@
        xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd" default-autowire="byName">
 
     <!-- <bean id="messageService" class="com.javadoop.example.MessageServiceImpl"/> -->
-    <bean id="apoTest" class="com.test.aop.XmlTestImpl"/>
+    <bean id="apoTest" class="com.test.springaop.XmlTestImpl"/>
 </beans>

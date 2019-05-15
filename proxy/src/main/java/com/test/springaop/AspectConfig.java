@@ -1,4 +1,4 @@
-package com.test.aop;
+package com.test.springaop;
 
 import org.aspectj.lang.annotation.After;
 import org.aspectj.lang.annotation.Aspect;
@@ -18,7 +18,7 @@ public class AspectConfig {
 	/**
 	 * 拦截com.test.aop包中所有的方法
 	 */
-	@Pointcut("execution(* com.test.aop..*.*(..))")// the pointcut expression
+	@Pointcut("execution(* com.test.springaop..*.*(..))")// the pointcut expression
 	private void pointcut() {
 		
 	}

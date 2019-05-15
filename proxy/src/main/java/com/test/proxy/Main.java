@@ -1,29 +1,38 @@
 package com.test.proxy;
 
-import com.test.proxy.cglib.InterceptorClazz;
-import com.test.proxy.cglib.ProxyMethIntercept;
-import com.test.proxy.javaProxy.InvokeClassImpl;
-import com.test.proxy.javaProxy.InvokeClazz;
-import com.test.proxy.javaProxy.ProxyInvokeHandler;
+import com.test.proxy.cglib.CglibTarget;
+import com.test.proxy.cglib.CglibProxy;
+import com.test.proxy.javaProxy.TargetImpl;
+import com.test.proxy.javaProxy.Target;
+import com.test.proxy.javaProxy.JavaProxy;
 
 public class Main {
 	
 	public static void main(String[] ss){
-		
-		InvokeClazz test = new InvokeClassImpl();
-		ProxyInvokeHandler proxyInvoke = new ProxyInvokeHandler(test);
-		InvokeClazz iTest = (InvokeClazz)proxyInvoke.getProxy();
-		iTest.sayHello("hello world");
-		
+
+
+		// java 动态代理
+		javaproxy();
+
+		// cglib动态代理
 		System.out.println("-------------------");
-		ProxyMethIntercept test2 = new ProxyMethIntercept();
-		InterceptorClazz doTest = (InterceptorClazz)test2.newProxyInstance(InterceptorClazz.class);
-		doTest.doSth("haha..");
-		
-		System.out.println("-------------------");
-		ProxyMethIntercept test3 = new ProxyMethIntercept();
-		InvokeClassImpl testHallo = (InvokeClassImpl)test3.newProxyInstance(InvokeClassImpl.class);
-		testHallo.sayHello("say hello....");
+
+		cglibProxy();
+
+	}
+
+	private static void javaproxy(){
+		JavaProxy javaProxy = new JavaProxy(new TargetImpl());
+		Target proxy = (Target)javaProxy.newInstance();
+		proxy.sayHello("java");
+
+	}
+
+	private static  void cglibProxy(){
+		CglibProxy test2 = new CglibProxy();
+		CglibTarget target = (CglibTarget)test2.newProxyInstance(CglibTarget.class);
+		target.doSth("cglib..");
+
 	}
 	
 
