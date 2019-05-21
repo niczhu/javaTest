@@ -7,4 +7,8 @@ import org.springframework.context.annotation.Configuration;
 @ComponentScan("com.test.factoryBean")
 public class Config {
 
+    /**
+     * spring factoryBean类的使用demo
+     */
+
 }
