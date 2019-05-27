@@ -8,8 +8,8 @@ public class MySelector implements ImportSelector {
     @Override
     public String[] selectImports(AnnotationMetadata importingClassMetadata) {
 
-        System.out.println("======= "+importingClassMetadata.toString());
+        System.out.println("======= "+importingClassMetadata.getClassName());
 
-        return new String[]{};
+        return new String[]{TestSelect.class.getName()};
     }
 }

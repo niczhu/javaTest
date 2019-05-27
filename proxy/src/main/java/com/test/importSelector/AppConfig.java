@@ -5,6 +5,7 @@ import org.springframework.context.annotation.Configuration;
 
 @Configuration
 @ComponentScan("com.test.factoryBean")
+@EnableMySelector
 public class AppConfig {
 
 
