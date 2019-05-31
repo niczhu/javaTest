@@ -9,6 +9,8 @@ import javax.servlet.ServletRegistration;
 
 /**
  * 初始化web工程 servlet
+ * 配合spring 使用
+ *
  */
 public class MyWebApplicationInitializer implements WebApplicationInitializer {
 
