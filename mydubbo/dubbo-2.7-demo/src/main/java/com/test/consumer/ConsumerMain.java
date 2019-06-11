@@ -10,7 +10,7 @@ public class ConsumerMain {
 
         HelloServie helloServie = ct.getBean("helloService",HelloServie.class);
 
-        String t = helloServie.sayHello("hello service");
+        String t = helloServie.sayHello("hello services");
 
         System.out.println(t);
 

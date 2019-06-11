@@ -7,9 +7,7 @@
     <dubbo:application name="provider"/>
 
     <dubbo:registry address="zookeeper://127.0.0.1:2181"/>
-<!--    <dubbo:registry address="multicast://127.0.0.1:2181"/>-->
 
-    <!--    <dubbo:protocol name="dubbo" port="20890"/>-->
 
     <bean id="helloService" class="com.test.provider.HelloServiceImpl"/>
 

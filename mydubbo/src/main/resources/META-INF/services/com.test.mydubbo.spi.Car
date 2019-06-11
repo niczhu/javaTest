@@ -1,0 +1,2 @@
+audi=com.test.mydubbo.spi.AudiCarImpl
+benz=com.test.mydubbo.spi.BenzCarImpl

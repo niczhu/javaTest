@@ -8,6 +8,6 @@
 
     <dubbo:registry  address="zookeeper://127.0.0.1:2181"/>
 
-    <dubbo:reference id="helloServie"  interface="com.test.api.HelloServie"/>
+    <dubbo:reference id="helloService"  interface="com.test.api.HelloServie"/>
 
 </beans>
