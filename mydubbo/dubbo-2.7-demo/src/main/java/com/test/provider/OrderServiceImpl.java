@@ -2,9 +2,9 @@ package com.test.provider;
 
 import com.test.api.HelloService;
 
-public class HelloServiceImpl implements HelloService {
+public class OrderServiceImpl implements HelloService {
     @Override
     public String sayHello(String name) {
-        return "hello "+ name;
+        return "orderService ==" + name;
     }
 }

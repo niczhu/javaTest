@@ -9,9 +9,12 @@
     <dubbo:registry address="zookeeper://127.0.0.1:2181"/>
 
 
-    <bean id="helloService" class="com.test.provider.HelloServiceImpl"/>
+    <bean id="helloService" class="com.test.provider.HelloServiceImpl" />
+
 
     <!--    向外提供服务接口-->
-    <dubbo:service interface="com.test.api.HelloServie" ref="helloService"/>
+    <dubbo:service group="group1" version="1.0" interface="com.test.api.HelloService" ref="helloService"/>
+
+    <dubbo:service group="group2" version="2.0" interface="com.test.api.HelloService" ref="helloService"/>
 
 </beans>

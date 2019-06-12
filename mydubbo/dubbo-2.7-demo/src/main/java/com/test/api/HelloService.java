@@ -1,6 +1,6 @@
 package com.test.api;
 
-public interface HelloServie {
+public interface HelloService {
 
     public String sayHello(String name);
 }
