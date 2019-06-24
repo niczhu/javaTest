@@ -32,11 +32,14 @@ public class MyEventSource {
     }
 
     public void notifyListener(){
-        MyListener listener = null;
+        MyListener listener1 = null;
         Iterator iterator = this.listeners.iterator();
         while (iterator.hasNext()){
-             listener = (MyListener) iterator.next();
-             listener.fireMyListener(new MyEvent(this));
+             listener1 = (MyListener) iterator.next();
+
+             if(listener1!=null){
+                 listener1.fireMyListener(new MyEvent(this));
+             }
 
         }
     }
