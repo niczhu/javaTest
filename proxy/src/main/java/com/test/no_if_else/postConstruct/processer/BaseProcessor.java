@@ -16,25 +16,9 @@ public class BaseProcessor implements Processer {
     public void init(){
         System.out.println("==init postconstruct== this="+this.getClass());
         registProcess.registProcess(this);
+
+        System.out.println("init list");
+        registProcess.registList(this);
     }
 
-
-    /**
-     * 处理器链
-     */
-    private List<Processer> processorChain = new ArrayList<>();
-
-    public void registProcess(Processer processer) {
-        if (!processorChain.contains(processer)) {
-            processorChain.add(processer);
-        }
-    }
-
-    public void allProcesser(){
-        System.out.println("===for each processeorChain size="+processorChain.size());
-
-        for (Processer processer : processorChain) {
-            System.out.println("===" + processer.getClass());
-        }
-    }
 }
