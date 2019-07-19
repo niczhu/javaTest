@@ -17,11 +17,7 @@ public class NioClient  {
     public static void main(String[] args) {
         NioClient nioClient = new NioClient();
         try {
-//            nioClient.client();
-            System.out.println(1<<0);
-            System.out.println(1<<2);
-            System.out.println(1<<3);
-            System.out.println(1<<4);
+            nioClient.client();
         } catch (Exception e) {
             e.printStackTrace();
         }
