@@ -7,10 +7,15 @@ import java.util.Set;
 /**
  * 事件源
  *
+ * <p>依赖监听器</p>
+ * <p>监听器被注册到事件源上</p>
+ *
  */
 public class MyEventSource {
 
     private Set<MyListener> listeners ;
+
+    private String name;
 
     public MyEventSource(){
         this.listeners = new HashSet<>();
@@ -31,9 +36,10 @@ public class MyEventSource {
         this.listeners.remove(listener);
     }
 
-    public void notifyListener(){
+    private void notifyListener(){
         MyListener listener1 = null;
         Iterator iterator = this.listeners.iterator();
+
         while (iterator.hasNext()){
              listener1 = (MyListener) iterator.next();
 
@@ -42,6 +48,17 @@ public class MyEventSource {
              }
 
         }
+
+    }
+
+    public void setName(String name){
+        this.name = name;
+        notifyListener();
+    }
+
+    public String getName(){
+        return this.name;
+
     }
 
 }
