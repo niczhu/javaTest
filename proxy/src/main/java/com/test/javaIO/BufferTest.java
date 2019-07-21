@@ -1,8 +1,12 @@
 package com.test.javaIO;
 
+import io.netty.channel.ChannelInitializer;
+import io.netty.channel.nio.NioEventLoopGroup;
+
 import java.io.RandomAccessFile;
 import java.nio.ByteBuffer;
 import java.nio.channels.FileChannel;
+import java.nio.channels.SocketChannel;
 
 public class BufferTest {
     public static void main(String[] args) throws Exception {
@@ -17,7 +21,6 @@ public class BufferTest {
         while(buffer.hasRemaining()){
             System.out.println(buffer.get());
         }
-
 
     }
 }

@@ -8,6 +8,16 @@ package com.test.springEvent.javaEvent;
  */
 public class Main {
 
+    /**
+     * 笔记
+     *
+     * 事件源通过监听器触发事件
+     *
+     * source --> listener --> event
+     *
+     * @param args
+     */
+
     public static void main(String[] args) {
 
         MyEventSource source = new MyEventSource();
@@ -24,6 +34,9 @@ public class Main {
             }
         });
 
+        /**
+         * 触发事件
+         */
         source.setName(" nick");
     }
 }
