@@ -17,12 +17,16 @@ public class EchoClientHandler extends ChannelInboundHandlerAdapter {
 
     /**
      * Creates a client-side handler.
+     * 初始化时客户端发送字节消息
      */
     public EchoClientHandler() {
-        firstMessage = Unpooled.buffer(EchoClient.SIZE);
-        for (int i = 0; i < firstMessage.capacity(); i ++) {
-            firstMessage.writeByte((byte) i);
-        }
+        firstMessage = Unpooled.buffer(1024);
+//        for (int i = 0; i < firstMessage.capacity(); i ++) {
+//            firstMessage.writeByte((byte) i);
+//        }
+
+        byte[] req="hello Netty".getBytes();
+        firstMessage.writeBytes(req);
     }
 
     @Override
@@ -31,6 +35,11 @@ public class EchoClientHandler extends ChannelInboundHandlerAdapter {
         ctx.writeAndFlush(firstMessage);
     }
 
+    /**
+     * server 返回消息
+     * @param ctx
+     * @param msg
+     */
     @Override
     public void channelRead(ChannelHandlerContext ctx, Object msg) {
         ByteBuf buf=(ByteBuf) msg;
