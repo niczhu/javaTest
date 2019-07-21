@@ -18,6 +18,8 @@ import io.netty.channel.ChannelInboundHandlerAdapter;
  *   3. 按住 ctrl + 】
  *   4. 输入命令 send helloworld
  *
+ *
+ *  参考： https://www.cnblogs.com/xujian2014/p/5704316.html
  *  ************************
  *
  * @Author zhuhp
