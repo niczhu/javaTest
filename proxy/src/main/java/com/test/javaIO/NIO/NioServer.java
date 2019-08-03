@@ -34,6 +34,7 @@ public class NioServer implements Runnable {
                 Iterator<SelectionKey> iterator = selectionKeys.iterator();
                 SelectionKey key = null;
 
+                // 只有iterator中才能使用remove()
                 while (iterator.hasNext()) {
                     // 4.获取一个选中的key
                     key = iterator.next();

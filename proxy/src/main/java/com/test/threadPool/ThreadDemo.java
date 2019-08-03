@@ -4,22 +4,36 @@ import io.netty.util.concurrent.ThreadPerTaskExecutor;
 
 import java.nio.channels.SelectionKey;
 import java.nio.channels.Selector;
+import java.util.HashMap;
+import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.Future;
 import java.util.concurrent.locks.AbstractQueuedSynchronizer;
 import java.util.concurrent.locks.ReentrantLock;
+
+import static javafx.scene.input.KeyCode.K;
 
 public class ThreadDemo{
 
     public static void main(String[] args) {
 
-        for (int i = 0; i < 5; i++) {
-            Thread thread = new Thread();
-            System.out.println(thread.getName() );
-        }
-        for (int i = 0; i < 3; i++) {
-            runnableTest runnableTest = new runnableTest();
-            runnableTest.run();
-        }
+        int h;
+        Object key = new Object();
+        int b;
+        b =1; //1
+        h=0;  //0
+
+        System.out.println(1&1);
+        System.out.println(0&0);
+        System.out.println(1|0);
+        System.out.println(0|0);
+
+        System.out.println(h=key.hashCode());
+        System.out.println(b = h>>>16);
+        System.out.println(h ^ b);
+        ConcurrentHashMap<Object, Object> objectObjectConcurrentHashMap = new ConcurrentHashMap<>();
+        objectObjectConcurrentHashMap.put("","");
+
+//        return (key == null) ? 0 : (h = key.hashCode()) ^ (h >>> 16);
 
 
     }
