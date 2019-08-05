@@ -13,7 +13,8 @@ public class CglibProxy implements MethodInterceptor {
 
     @Override
     public Object intercept(Object arg0, Method arg1, Object[] arg2, MethodProxy proxy) throws Throwable {
-        System.out.println("cglib proxy ..");
+        System.out.println("cglib proxy intercept..");
+        System.out.println("intercept method = "+ arg1);
         return proxy.invokeSuper(arg0, arg2);
     }
 

@@ -4,7 +4,7 @@ public class TargetImpl implements Target {
 
 	@Override
 	public String sayHello(String string) {
-		System.out.println("java proxy target clazz impl .. ");
+		System.out.println("java proxy target clazz impl say:=> "+string);
 		return "sayHello:" + string;
 	}
 
