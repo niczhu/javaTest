@@ -15,17 +15,17 @@ public class RegistProcessService {
      */
     private List<Processer> processorChain = new ArrayList<>();
 
-    private List<BaseProcessor> processorList = new ArrayList<>();
-
-    public void registList(BaseProcessor baseProcessor){
-        processorList.add(baseProcessor);
-
-    }
-    public void allList(){
-        for (BaseProcessor baseProcessor : processorList) {
-            System.out.println("baseProcessor "+ baseProcessor.getClass());
-        }
-    }
+//    private List<BaseProcessor> processorList = new ArrayList<>();
+//
+//    public void registList(BaseProcessor baseProcessor){
+//        processorList.add(baseProcessor);
+//
+//    }
+//    public void allList(){
+//        for (BaseProcessor baseProcessor : processorList) {
+//            System.out.println("baseProcessor "+ baseProcessor.getClass());
+//        }
+//    }
 
     public void registProcess(Processer processer) {
         if (!processorChain.contains(processer)) {

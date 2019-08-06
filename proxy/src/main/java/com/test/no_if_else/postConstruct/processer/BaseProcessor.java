@@ -18,7 +18,7 @@ public class BaseProcessor implements Processer {
         registProcess.registProcess(this);
 
         System.out.println("init list");
-        registProcess.registList(this);
+//        registProcess.registList(this);
     }
 
 }
