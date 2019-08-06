@@ -39,6 +39,13 @@ public class Main {
 			System.out.println(urL.getPath());
 		}
 
+		System.out.println(Thread.currentThread());
+		System.out.println(Thread.currentThread().getContextClassLoader());
+
+
+	}
+
+	public class MyClassLoad extends ClassLoader{
 
 	}
 
