@@ -25,6 +25,9 @@ public class NioClient  {
 
     public void client() throws Exception{
 
+
+//        SocketChannel open = SocketChannel.open(new InetSocketAddress("127.0.0.1",9001));
+
         SocketChannel socketChannel =SocketChannel.open();
         socketChannel.connect(new InetSocketAddress("127.0.0.1",9190));
         socketChannel.configureBlocking(false);
@@ -40,6 +43,7 @@ public class NioClient  {
             buffer.put(bytes);
             buffer.flip();
 
+            //写入数据到网络连接中
             socketChannel.write(buffer);
             buffer.clear();
 

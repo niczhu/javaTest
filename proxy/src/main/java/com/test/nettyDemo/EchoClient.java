@@ -2,10 +2,13 @@ package com.test.nettyDemo;
 
 import io.netty.bootstrap.Bootstrap;
 import io.netty.channel.*;
+import io.netty.channel.nio.NioEventLoop;
 import io.netty.channel.nio.NioEventLoopGroup;
 import io.netty.channel.socket.SocketChannel;
 import io.netty.channel.socket.nio.NioServerSocketChannel;
 import io.netty.channel.socket.nio.NioSocketChannel;
+import io.netty.util.concurrent.DefaultPromise;
+import io.netty.util.concurrent.EventExecutor;
 
 /**
  * @Author zhuhp
@@ -40,7 +43,6 @@ public class EchoClient extends ChannelInboundHandlerAdapter {
             f.channel().closeFuture().sync();
 
         }finally {
-
         }
 
     }

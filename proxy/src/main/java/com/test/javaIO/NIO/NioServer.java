@@ -20,41 +20,6 @@ public class NioServer implements Runnable {
         new Thread(new NioServer()).start();
     }
 
-    @Override
-    public void run() {
-        while(true) {
-            try {
-                // 1.多路复用器监听阻塞
-                selector.select(1000);
-
-                // 2.多路复用器已经选择的结果集
-                Set<SelectionKey> selectionKeys = selector.selectedKeys();
-
-                // 3.不停的轮询
-                Iterator<SelectionKey> iterator = selectionKeys.iterator();
-                SelectionKey key = null;
-
-                // 只有iterator中才能使用remove()
-                while (iterator.hasNext()) {
-                    // 4.获取一个选中的key
-                    key = iterator.next();
-
-                    // 5.获取后便将其从容器中移除
-                    iterator.remove();
-
-                    if (!key.isValid()) {
-                        continue;
-                    }
-
-                    dispatch(key);
-                }
-
-            } catch (Exception e) {
-                e.printStackTrace();
-            }
-        }
-    }
-
     /**
      * 初始化
      * @throws Exception
@@ -77,6 +42,45 @@ public class NioServer implements Runnable {
         }
     }
 
+    @Override
+    public void run() {
+        while(true) {
+            try {
+                // 1.多路复用器监听阻塞，timeout=1s
+                selector.select(1000);
+
+                // 2.多路复用器已经选择的结果集
+                Set<SelectionKey> selectionKeys = selector.selectedKeys();
+
+                // 3.不停的轮询
+                Iterator<SelectionKey> iterator = selectionKeys.iterator();
+                SelectionKey key = null;
+
+                // 只有iterator中才能使用remove()
+                while (iterator.hasNext()) {
+                    System.out.println("while selectionKeys");
+                    // 4.获取一个选中的key
+                    key = iterator.next();
+
+                    // 5.获取后便将其从容器中移除
+                    iterator.remove();
+
+                    if (!key.isValid()) {
+                        System.out.println("key is unvalid");
+                        continue;
+                    }
+
+                    dispatch(key);
+                }
+
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+        }
+    }
+
+
+
     /**
      * 分发
      * @param key
@@ -84,9 +88,8 @@ public class NioServer implements Runnable {
      */
     private void dispatch(SelectionKey key) throws Exception {
         // 阻塞状态处理
-        System.out.println("key 的state ,accept= "+ key.isAcceptable()
-                + ",read="+key.isReadable()+" ,write="+key.isWritable() );
-
+//        System.out.println("key 的state ,accept= "+ key.isAcceptable() + ",read="+key.isReadable()+" ,write="+key.isWritable() );
+        System.out.println("key hashcode ==> "+key.hashCode());
         if (key.isAcceptable()) {
 
             accept(key);//新链接建立，注册
@@ -103,6 +106,7 @@ public class NioServer implements Runnable {
     // 设置阻塞，等待Client请求。在传统IO编程中，用的是ServerSocket和Socket。在NIO中采用的ServerSocketChannel和SocketChannel
     private void accept(SelectionKey selectionKey) {
         try {
+            System.out.println("accept ==> 新建立连接");
             // 1.获取通道服务
             ServerSocketChannel server = (ServerSocketChannel) selectionKey.channel();
             // 2.执行阻塞方法
