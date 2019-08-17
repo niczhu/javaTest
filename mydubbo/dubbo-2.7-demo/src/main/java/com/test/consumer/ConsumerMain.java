@@ -12,13 +12,18 @@ public class ConsumerMain {
 
         HelloService helloServie = ct.getBean("helloService", HelloService.class);
 
-        HelloService test = ct.getBean("testService",HelloService.class);
+        for (int i = 0; i < 10; i++) {
 
-        String t = helloServie.sayHello("hello services ==");
+            try {
+                Thread.sleep(1000);
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
 
-        System.out.println(t);
+            String t = helloServie.sayHello(" count==>"+i);
 
-        System.out.println(test.sayHello("test services=="));
+            System.out.println(t);
+        }
 
     }
 

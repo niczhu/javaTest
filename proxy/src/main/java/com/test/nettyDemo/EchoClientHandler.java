@@ -48,7 +48,9 @@ public class EchoClientHandler extends ChannelInboundHandlerAdapter {
         String body= null;
         try {
             body = new String(req,"UTF-8");
+
             ctx.write(msg);
+            System.out.println("===channelRead invoke write after == body=>"+ body.toString());
         } catch (Exception e) {
             e.printStackTrace();
         }
