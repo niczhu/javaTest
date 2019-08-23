@@ -19,7 +19,10 @@ public class Main {
         // DelegatingApplicationListener # onApplicationEvent()
         // LiquibaseServiceLocatorApplicationListener # onApplicationEvent()
 
-
+        int m =2;
+        if(m==2 ||(m++)==4){
+            System.out.println(m);
+        }
 
     }
 

@@ -10,7 +10,7 @@ import org.springframework.context.annotation.EnableAspectJAutoProxy;
  */
 
 @Configuration
-@ComponentScan("com.test")
+@ComponentScan("com.test.springaop")
 @EnableAspectJAutoProxy
 public class AppConfig {
 
