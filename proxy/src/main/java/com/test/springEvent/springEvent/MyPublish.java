@@ -17,9 +17,8 @@ public class MyPublish implements ApplicationContextAware {
     }
 
     public void publishEvent(ApplicationEvent event){
-        System.out.println("=============");
+        System.out.println("====MyPublish==publishEvent==ss=====");
         applicationContext.publishEvent(event);
-        System.out.println("=============");
 
     }
 }

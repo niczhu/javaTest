@@ -8,7 +8,11 @@ public class Main {
 
         AnnotationConfigApplicationContext ctx = new AnnotationConfigApplicationContext(Config.class);
 
-        MyPublish myPublish = (MyPublish) ctx.getBean("myPublish");
-        myPublish.publishEvent(new MyEvent("测试"));
+        // 法一
+        ctx.publishEvent(new MyEvent("测试"));
+
+        //　法二
+//        MyPublish myPublish = (MyPublish) ctx.getBean("myPublish");
+//        myPublish.publishEvent(new MyEvent("测试"));
     }
 }

@@ -9,7 +9,7 @@ public class MyListener2 implements ApplicationListener {
     @Override
     public void onApplicationEvent(ApplicationEvent event) {
         if(event instanceof MyEvent){
-            System.out.println("event = myevent ...");
+            System.out.println("MyListener onApplicationEvent2...");
             ((MyEvent) event).eventTest();
         }
     }

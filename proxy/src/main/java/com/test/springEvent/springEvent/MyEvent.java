@@ -9,10 +9,11 @@ public class MyEvent extends ApplicationEvent {
 
     public MyEvent(Object source) {
         super(source);
+        System.out.println(source.getClass().getSimpleName());
     }
 
     public void eventTest(){
-        System.out.println("====事件方法 event test() ====");
+        System.out.println("====MyEvent 发生了变化  ====");
     }
 
 }
