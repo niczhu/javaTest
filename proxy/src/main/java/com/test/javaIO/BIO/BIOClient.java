@@ -3,6 +3,12 @@ package com.test.javaIO.BIO;
 import java.io.*;
 import java.net.InetSocketAddress;
 import java.net.Socket;
+import java.util.concurrent.AbstractExecutorService;
+import java.util.concurrent.ExecutorService;
+import java.util.concurrent.Executors;
+import java.util.concurrent.ThreadPoolExecutor;
+import java.util.concurrent.locks.AbstractQueuedSynchronizer;
+import java.util.concurrent.locks.ReentrantLock;
 
 public class BIOClient {
 
@@ -24,8 +30,6 @@ public class BIOClient {
         System.out.println("服务器响应： " + in.readUTF());
 
         client.close();
-
-
 
 
     }

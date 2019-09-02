@@ -17,5 +17,8 @@ public class A extends  ParentTread{
         }
         System.out.println("====A 1 end ====");
 
+
+
     }
+
 }

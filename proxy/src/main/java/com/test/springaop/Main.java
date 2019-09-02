@@ -4,6 +4,9 @@ import org.springframework.context.ApplicationContext;
 import org.springframework.context.annotation.AnnotationConfigApplicationContext;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
 
+import java.util.concurrent.Executors;
+import java.util.concurrent.ThreadPoolExecutor;
+
 public class Main {
 
 	public static void main(String[] s) {
@@ -15,9 +18,8 @@ public class Main {
 	 */
 	public static void annotationSpring(){
 		AnnotationConfigApplicationContext ctxt = new AnnotationConfigApplicationContext(AppConfig.class);
-		ctxt.getBean(AspectTest.class).test();;
+		ctxt.getBean(AspectTest.class).test();
 	}
-	
 	/**
 	 * xml配置spring
 	 */
