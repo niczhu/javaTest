@@ -23,5 +23,8 @@ public class Main {
         strings.add("1");
         strings.add("1");
         System.out.println(strings);
+
+        int s = Integer.parseInt("23");
+        System.out.println(s);
     }
 }
