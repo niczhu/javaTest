@@ -1,5 +1,7 @@
 package com.test.springaop;
 
+import org.aspectj.lang.ProceedingJoinPoint;
+import org.aspectj.lang.Signature;
 import org.aspectj.lang.annotation.After;
 import org.aspectj.lang.annotation.Aspect;
 import org.aspectj.lang.annotation.Before;
@@ -24,7 +26,10 @@ public class AspectConfig {
 	}
 	
 	@Before("pointcut()")
-	public void beforeAdvice(){
+	public void beforeAdvice(ProceedingJoinPoint  proceedingJoinPoint){
+		Signature signature = proceedingJoinPoint.getSignature();
+		System.out.println(signature);
+
 		System.out.println("aspectConfig class -> befor ...");
 	}
 	

@@ -14,16 +14,19 @@ import java.lang.reflect.Method;
 @Aspect
 public class MultiDataSourceAop {
 
-    @Pointcut("execution(* com.test.multiDataSource..*.*(..))")
+    @Pointcut("execution(* com.test.multiDataSource.dao..*.*(..))")
     public void pointcut(){
     }
 
-    @Before(value = "execution(* com.test.multiDataSource.dao..*.*(..))" )
+    @Before("pointcut()" )
     public void before(JoinPoint joinPoint){
+
+        Object target = joinPoint.getTarget();
+
         MethodSignature signature = (MethodSignature) joinPoint.getSignature();
+
         Method method = signature.getMethod();
         DataSourceType annotation = method.getAnnotation(DataSourceType.class);
-
         if(annotation==null){
             MultiDataSourceHandler.setDataSource(MultiDataSourceHandler.MASTER);
             return;

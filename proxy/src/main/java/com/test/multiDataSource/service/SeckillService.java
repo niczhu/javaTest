@@ -17,5 +17,15 @@ public class SeckillService
         List<SeckillBean> seckillBeans = seckillDao.queryAll(0, 10);
 
         System.out.println(seckillBeans.size());
-    };
+    }
+
+    public void queryById(long id){
+        SeckillBean seckillBean = seckillDao.queryById(id);
+        if(seckillBean ==null){
+            System.out.println("query db is null");
+        }
+
+        System.out.println(seckillBean.getName());
+
+    }
 }

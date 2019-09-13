@@ -1,6 +1,7 @@
 package com.test.multiDataSource.dao;
 
 import com.test.multiDataSource.bean.SeckillBean;
+import com.test.multiDataSource.util.DataSourceType;
 import org.apache.ibatis.annotations.Param;
 import com.test.multiDataSource.bean.SeckillBean;
 
@@ -10,9 +11,6 @@ import java.util.List;
 /**
  * Created by zhuhp on 2016/12/24.
  */
-
-
-
 public interface SeckillDao {
     /**
      * 减库存
@@ -27,6 +25,7 @@ public interface SeckillDao {
      * @param seckillId
      * @return
      */
+    @DataSourceType("slaver")
     SeckillBean queryById(long seckillId);
 
     /**

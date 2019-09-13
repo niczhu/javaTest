@@ -32,10 +32,11 @@
     <bean id="dataSource" class="com.test.multiDataSource.util.MultiDataSource">
         <property name="targetDataSources">
             <map key-type="java.lang.String">
-                <entry key="masterDataSource" value-ref="masterDataSource"/>
-                <entry key="masterDataSource" value-ref="slaverDataSource"/>
+                <entry key="master" value-ref="masterDataSource"/>
+                <entry key="slaver" value-ref="slaverDataSource"/>
             </map>
         </property>
+        <property name="defaultTargetDataSource" ref="masterDataSource"/>
     </bean>
 
     <bean id="sqlSessionFactoryBean" class="org.mybatis.spring.SqlSessionFactoryBean">

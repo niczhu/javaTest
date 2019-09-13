@@ -17,20 +17,21 @@
         and number > 0;
     </update>
     <!--使用mybatis缓存的第三步，usecache=true 默认为true-->
-    <select id="queryById" resultType="SeckillBean" parameterType="long" >
-        select seckill_id,
-        name,
-        start_time,
-        end_time,
-        create_time
+    <select id="queryById" resultType="com.test.multiDataSource.bean.SeckillBean" parameterType="long" >
+        select
+            seckill_id,
+            `name`,
+            start_time,
+            end_time,
+            create_time
         FROM seckill
         where seckill_id = #{seckillId}
     </select>
 
     <select id="queryAll" resultType="SeckillBean">
         select seckill_id,
-        name,
-        number,
+        `name`,
+        `number`,
         start_time,
         end_time,
         create_time
