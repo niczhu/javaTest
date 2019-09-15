@@ -40,6 +40,19 @@
         limit #{offset},#{limit}
     </select>
 
+    <update id="updateMaster" parameterType="SeckillBean">
+        update seckill set
+            `name` = #{name}
+        where
+            seckill_id = #{seckillId}
+    </update>
+
+    <update id="updateSlaver" parameterType="SeckillBean">
+        update seckill set
+            `name` = #{name}
+        where
+            seckill_id = #{seckillId}
+    </update>
 
 
 </mapper>

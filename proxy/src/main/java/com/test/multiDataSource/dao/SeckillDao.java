@@ -20,6 +20,7 @@ public interface SeckillDao {
      */
     int reduceNumber(@Param("seckillId") long seckillId, @Param("killTime") Date killTime);
 
+
     /**
      *
      * @param seckillId
@@ -35,5 +36,11 @@ public interface SeckillDao {
      * @return
      */
     List<SeckillBean> queryAll(@Param("offset") int offset, @Param("limit") int limit);
+
+
+    long updateMaster(@Param("seckillId") long seckillId,@Param("name") String name);
+
+    @DataSourceType("slaver")
+    long updateSlaver(@Param("seckillId") long seckillId,@Param("name") String name);
 
 }
