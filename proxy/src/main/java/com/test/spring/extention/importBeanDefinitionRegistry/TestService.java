@@ -1,4 +1,4 @@
-package com.test.importBeanDefinitionRegistry;
+package com.test.spring.extention.importBeanDefinitionRegistry;
 
 import org.mybatis.spring.annotation.MapperScan;
 import org.springframework.stereotype.Component;

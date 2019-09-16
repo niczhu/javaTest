@@ -1,10 +1,10 @@
-package com.test.factoryBean;
+package com.test.spring.extention.factoryBean;
 
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
 
 @Configuration
-@ComponentScan("com.test.factoryBean")
+@ComponentScan("com.test.spring.extention.factoryBean")
 public class Config {
 
     /**

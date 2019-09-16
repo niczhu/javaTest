@@ -1,6 +1,5 @@
-package com.test.factoryBean;
+package com.test.spring.extention.factoryBean;
 
-import org.aspectj.weaver.ast.Test;
 import org.springframework.context.annotation.AnnotationConfigApplicationContext;
 
 public class Main {

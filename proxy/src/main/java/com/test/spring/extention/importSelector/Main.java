@@ -1,4 +1,4 @@
-package com.test.importSelector;
+package com.test.spring.extention.importSelector;
 
 import org.springframework.context.annotation.AnnotationConfigApplicationContext;
 

@@ -1,4 +1,4 @@
-package com.test.importBeanDefinitionRegistry;
+package com.test.spring.extention.importBeanDefinitionRegistry;
 
 import org.springframework.context.annotation.AnnotationConfigApplicationContext;
 

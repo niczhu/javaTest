@@ -1,4 +1,4 @@
-package com.test.factoryBean;
+package com.test.spring.extention.factoryBean;
 
 /**
  * @Author zhuhp
