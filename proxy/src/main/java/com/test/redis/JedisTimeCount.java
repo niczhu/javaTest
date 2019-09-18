@@ -36,6 +36,8 @@ public class JedisTimeCount {
             if(c < 5){
                 c++;
                 jedis.set(key,String.valueOf(c));
+                // incr
+//                jedis.incr(key);
                 System.out.println("count=>"+c);
             }else{
                 System.out.println("count over");
