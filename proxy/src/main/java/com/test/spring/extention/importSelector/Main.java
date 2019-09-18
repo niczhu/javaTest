@@ -18,7 +18,6 @@ public class Main {
         System.out.println("=======================");
 //        DefaultAdvisorAutoProxyCreator
         Thread thread = new Thread();
-        Executors.newSingleThreadExecutor()
 
     }
 }

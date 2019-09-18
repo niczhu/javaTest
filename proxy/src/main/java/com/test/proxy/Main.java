@@ -5,6 +5,7 @@ import com.test.proxy.cglib.CglibProxy;
 import com.test.proxy.javaProxy.TargetImpl;
 import com.test.proxy.javaProxy.Target;
 import com.test.proxy.javaProxy.JavaProxy;
+import net.sf.cglib.core.DebuggingClassWriter;
 import sun.misc.Launcher;
 import sun.misc.ProxyGenerator;
 import sun.misc.URLClassPath;
@@ -17,6 +18,10 @@ public class Main {
 	
 	public static void main(String[] ss){
 
+		//该设置用于输出cglib动态代理产生的类
+		System.setProperty(DebuggingClassWriter.DEBUG_LOCATION_PROPERTY, "D:");
+		//该设置用于输出jdk动态代理产生的类
+		System.getProperties().put("sun.misc.ProxyGenerator.saveGeneratedFiles", "true");
 
 		// java 动态代理
 		javaproxy();

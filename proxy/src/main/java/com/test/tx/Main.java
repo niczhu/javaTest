@@ -6,6 +6,7 @@ import org.springframework.boot.autoconfigure.transaction.TransactionAutoConfigu
 import org.springframework.transaction.annotation.Transactional;
 
 import java.sql.Connection;
+import java.util.concurrent.ConcurrentHashMap;
 
 /**
  * @Author zhuhp
@@ -16,5 +17,9 @@ public class Main {
 
 //        Connection connection = new Connection();
 //        JDBC4Connection jdbc4Connection = new JDBC4Connection();
+        ConcurrentHashMap<Object, Object> a = new ConcurrentHashMap<>();
+        a.put("1","bbb");
+        a.put("10","2222");
+        a.put("01","3333b");
     }
 }
