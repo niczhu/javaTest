@@ -1,5 +1,7 @@
 package com.test.consumer;
 
+import com.seckill.api.SeckillService;
+import com.seckill.bean.SeckillBean;
 import com.test.api.HelloService;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
 
@@ -10,7 +12,9 @@ public class ConsumerMain {
         ClassPathXmlApplicationContext ct = new ClassPathXmlApplicationContext("dubbo-consumer.xml");
         ct.start();
 
-        HelloService helloServie = ct.getBean("helloService", HelloService.class);
+//        HelloService helloServie = ct.getBean("helloService", HelloService.class);
+
+        SeckillService seckillService = ct.getBean("seckillService", SeckillService.class);
 
         for (int i = 0; i < 10; i++) {
 
@@ -20,11 +24,13 @@ public class ConsumerMain {
                 e.printStackTrace();
             }
 
-            String t = helloServie.sayHello(" count==>"+i);
+//            String t = helloServie.sayHello(" count==>"+i);
 
-            System.out.println(t);
+            SeckillBean seckillBean = seckillService.queryById();
+            System.out.println("========name=> " + seckillBean.getName());
         }
 
     }
+
 
 }
