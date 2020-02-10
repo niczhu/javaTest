@@ -1,6 +1,6 @@
 package com.test.it.framework.exception;
 
-public class PrjException extends RuntimeException {
+public class PrjException extends BasePrjException {
 
     private static final long serialVersionUID = -7576992670473664947L;
     private int code;
