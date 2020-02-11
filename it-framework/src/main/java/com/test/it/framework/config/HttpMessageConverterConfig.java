@@ -9,31 +9,33 @@ import org.springframework.context.annotation.Configuration;
 import org.springframework.http.MediaType;
 import org.springframework.http.converter.HttpMessageConverter;
 import org.springframework.http.converter.StringHttpMessageConverter;
-import org.springframework.web.servlet.config.annotation.ContentNegotiationConfigurer;
-import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
-import org.springframework.web.servlet.config.annotation.WebMvcConfigurerAdapter;
+import org.springframework.web.servlet.config.annotation.WebMvcConfigurationSupport;
 
-import java.nio.charset.Charset;
 import java.nio.charset.StandardCharsets;
 import java.util.ArrayList;
 import java.util.List;
 
 @Configuration
-public class HttpMessageConverterConfig extends WebMvcConfigurerAdapter {
+public class HttpMessageConverterConfig extends WebMvcConfigurationSupport {
 
     /**
      * 解决controller中@responseBody返回中文字符串乱码问题
+     *
      * @param
      */
     @Override
-    public void configureMessageConverters(List<HttpMessageConverter<?>> converters) {
-        super.configureMessageConverters(converters);
-        StringHttpMessageConverter converter = new StringHttpMessageConverter(StandardCharsets.UTF_8);
-        converters.add(converter);
+    protected void extendMessageConverters(List<HttpMessageConverter<?>> converters) {
+        super.extendMessageConverters(converters);
+        for (HttpMessageConverter<?> converter : converters) {
+            if (converter instanceof StringHttpMessageConverter) {
+                ((StringHttpMessageConverter) converter).setDefaultCharset(StandardCharsets.UTF_8);
+            }
+        }
     }
 
     /**
      * 解决返回json对象中文乱码问题
+     *
      * @return
      */
     @Bean
@@ -43,7 +45,7 @@ public class HttpMessageConverterConfig extends WebMvcConfigurerAdapter {
         FastJsonConfig fastJsonConfig = new FastJsonConfig();
 
         fastJsonConfig.setSerializerFeatures(SerializerFeature.PrettyFormat);
-        fastJsonConfig.setCharset(StandardCharsets.UTF_8);
+//        fastJsonConfig.setCharset(StandardCharsets.UTF_8);
 
         //处理中文乱码问题
         List<MediaType> fastMediaTypeList = new ArrayList<MediaType>();
@@ -60,4 +62,5 @@ public class HttpMessageConverterConfig extends WebMvcConfigurerAdapter {
 
         return new HttpMessageConverters(converter);
     }
+
 }
