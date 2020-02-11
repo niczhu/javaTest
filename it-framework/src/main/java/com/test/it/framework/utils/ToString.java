@@ -40,10 +40,10 @@ public class ToString implements Serializable {
                     if (i != fileds.length - 1) {
                         sb.append(", ");
                     }
-                } catch (IllegalArgumentException var6) {
-                    var6.printStackTrace();
-                } catch (IllegalAccessException var7) {
-                    var7.printStackTrace();
+                } catch (IllegalArgumentException e1) {
+                    e1.printStackTrace();
+                } catch (IllegalAccessException e2) {
+                    e2.printStackTrace();
                 }
             }
         }

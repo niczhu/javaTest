@@ -37,8 +37,8 @@ public class GlobalExceptionHandler {
         }
 
         Map<String, Object> map = new HashMap<>();
-        map.put("code", DefaultErrorCodeEnum.MISS_PARAMETER.getCode());
-        map.put("msg", DefaultErrorCodeEnum.MISS_PARAMETER.getMsg());
+        map.put("code", DefaultErrorCodeEnum.BAD_REQUEST.getCode());
+        map.put("msg", DefaultErrorCodeEnum.BAD_REQUEST.getMsg());
         map.put("detail", sb.toString());
 
         return map;
@@ -50,7 +50,9 @@ public class GlobalExceptionHandler {
         // 非预期异常
         if (!(ex instanceof PrjException)) {
             log.error("发生非预期异常");
-
+            Map<String, Object> map = new HashMap<>();
+            map.put("code",DefaultErrorCodeEnum.UNKNOWN.getCode());
+            map.put("msg", DefaultErrorCodeEnum.UNKNOWN.getMsg());
         } else {
             PrjException exception = (PrjException) ex;
 

@@ -1,4 +1,4 @@
-package com.test.it.framework.assertUtil;
+package com.test.it.framework.utils;
 
 import com.test.it.framework.exception.ErrorCode;
 import com.test.it.framework.exception.ErrorHelper;
