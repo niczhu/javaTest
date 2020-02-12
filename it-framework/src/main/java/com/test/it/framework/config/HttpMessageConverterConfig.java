@@ -1,8 +1,8 @@
 package com.test.it.framework.config;
 
 import com.alibaba.fastjson.serializer.SerializerFeature;
-import com.alibaba.fastjson.support.config.FastJsonConfig;
 import com.alibaba.fastjson.support.spring.FastJsonHttpMessageConverter;
+import com.test.it.framework.converter.DefaultJsonHttpMessageConverter;
 import org.springframework.boot.autoconfigure.web.HttpMessageConverters;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -41,24 +41,15 @@ public class HttpMessageConverterConfig extends WebMvcConfigurationSupport {
     @Bean
     public HttpMessageConverters fastJsonHttpMessageConverters() {
 
-        //添加fastJson的配置信息;
-        FastJsonConfig fastJsonConfig = new FastJsonConfig();
-
-        fastJsonConfig.setSerializerFeatures(SerializerFeature.PrettyFormat);
-//        fastJsonConfig.setCharset(StandardCharsets.UTF_8);
-
         //处理中文乱码问题
         List<MediaType> fastMediaTypeList = new ArrayList<MediaType>();
         fastMediaTypeList.add(MediaType.APPLICATION_JSON_UTF8);
 
-        //需要定义一个convert转换消息的对象;
-        FastJsonHttpMessageConverter fastConverter = new FastJsonHttpMessageConverter();
-
         //在convert中添加配置信息
-        fastConverter.setSupportedMediaTypes(fastMediaTypeList);
-        fastConverter.setFastJsonConfig(fastJsonConfig);
+        DefaultJsonHttpMessageConverter defaultJsonHttpMessageConverter = new DefaultJsonHttpMessageConverter();
+        defaultJsonHttpMessageConverter.setSupportedMediaTypes(fastMediaTypeList);
 
-        HttpMessageConverter<?> converter = fastConverter;
+        HttpMessageConverter<?> converter = defaultJsonHttpMessageConverter;
 
         return new HttpMessageConverters(converter);
     }

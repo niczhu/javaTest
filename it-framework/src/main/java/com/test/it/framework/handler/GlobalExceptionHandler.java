@@ -3,6 +3,7 @@ package com.test.it.framework.handler;
 import com.test.it.framework.exception.DefaultErrorCodeEnum;
 import com.test.it.framework.exception.PrjException;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.validation.BindException;
 import org.springframework.validation.BindingResult;
 import org.springframework.validation.FieldError;
 import org.springframework.web.bind.MethodArgumentNotValidException;
@@ -24,16 +25,16 @@ public class GlobalExceptionHandler {
 
     private static ModelAndView MODAL_AND_VIEW = new ModelAndView();
 
-    @ExceptionHandler(MethodArgumentNotValidException.class)
+    @ExceptionHandler({MethodArgumentNotValidException.class,BindException.class})
     @ResponseBody
-//    @ResponseStatus(HttpStatus.BAD_REQUEST)
-    public Object validatorException(HttpServletRequest request, HttpServletResponse response, Object handler, MethodArgumentNotValidException ex) {
+    public Object webRequestValidatorException(HttpServletRequest request, HttpServletResponse response, Object handler, MethodArgumentNotValidException ex) {
 
         BindingResult bindingResult = ex.getBindingResult();
         List<FieldError> fieldErrors = bindingResult.getFieldErrors();
         StringBuffer sb = new StringBuffer();
+        sb.append("参数");
         for (FieldError error : fieldErrors) {
-            sb.append("参数[").append(error.getField()).append("]").append(error.getDefaultMessage());
+            sb.append("[").append(error.getField()).append("]").append(error.getDefaultMessage());
         }
 
         Map<String, Object> map = new HashMap<>();
@@ -53,9 +54,10 @@ public class GlobalExceptionHandler {
             Map<String, Object> map = new HashMap<>();
             map.put("code",DefaultErrorCodeEnum.UNKNOWN.getCode());
             map.put("msg", DefaultErrorCodeEnum.UNKNOWN.getMsg());
+            map.put("detail", ex.getMessage());
+            return map;
         } else {
             PrjException exception = (PrjException) ex;
-
             //TODO:未登录异常
             Map<String, Object> map = new HashMap<>();
             map.put("code", exception.getCode());
@@ -63,8 +65,6 @@ public class GlobalExceptionHandler {
             map.put("detail", exception.getDetail());
             return map;
         }
-
-        return null;
     }
 
 }
