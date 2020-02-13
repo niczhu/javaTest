@@ -1,10 +1,6 @@
 package com.test.it.framework.config;
 
-import com.alibaba.fastjson.serializer.SerializerFeature;
-import com.alibaba.fastjson.support.spring.FastJsonHttpMessageConverter;
-import com.test.it.framework.converter.DefaultJsonHttpMessageConverter;
-import org.springframework.boot.autoconfigure.web.HttpMessageConverters;
-import org.springframework.context.annotation.Bean;
+import com.test.it.framework.converter.JsonHttpMessageConverter;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.http.MediaType;
 import org.springframework.http.converter.HttpMessageConverter;
@@ -33,25 +29,41 @@ public class HttpMessageConverterConfig extends WebMvcConfigurationSupport {
         }
     }
 
-    /**
-     * 解决返回json对象中文乱码问题
-     *
-     * @return
-     */
-    @Bean
-    public HttpMessageConverters fastJsonHttpMessageConverters() {
-
+    @Override
+    protected void configureMessageConverters(List<HttpMessageConverter<?>> converters) {
         //处理中文乱码问题
         List<MediaType> fastMediaTypeList = new ArrayList<MediaType>();
         fastMediaTypeList.add(MediaType.APPLICATION_JSON_UTF8);
 
         //在convert中添加配置信息
-        DefaultJsonHttpMessageConverter defaultJsonHttpMessageConverter = new DefaultJsonHttpMessageConverter();
+        JsonHttpMessageConverter defaultJsonHttpMessageConverter = new JsonHttpMessageConverter();
         defaultJsonHttpMessageConverter.setSupportedMediaTypes(fastMediaTypeList);
 
         HttpMessageConverter<?> converter = defaultJsonHttpMessageConverter;
+        converters.add(converter);
 
-        return new HttpMessageConverters(converter);
+        super.configureMessageConverters(converters);
     }
+
+    /**
+     * 解决返回json对象中文乱码问题
+     * 继承 WebMvcConfigurationSupport后不能再使用@Bean 来装配转换器
+     * @return
+     */
+//    @Bean
+//    public HttpMessageConverters fastJsonHttpMessageConverters() {
+//
+//        //处理中文乱码问题
+//        List<MediaType> fastMediaTypeList = new ArrayList<MediaType>();
+//        fastMediaTypeList.add(MediaType.APPLICATION_JSON_UTF8);
+//
+//        //在convert中添加配置信息
+//        JsonHttpMessageConverter defaultJsonHttpMessageConverter = new JsonHttpMessageConverter();
+//        defaultJsonHttpMessageConverter.setSupportedMediaTypes(fastMediaTypeList);
+//
+//        HttpMessageConverter<?> converter = defaultJsonHttpMessageConverter;
+//
+//        return new HttpMessageConverters(converter);
+//    }
 
 }

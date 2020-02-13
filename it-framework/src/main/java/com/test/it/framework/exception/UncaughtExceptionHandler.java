@@ -8,8 +8,8 @@ import org.springframework.stereotype.Component;
  * 未捕获异常处理类
  */
 @Slf4j
-//@Component
-public class PrjExceptionHandler implements Thread.UncaughtExceptionHandler {
+@Component
+public class UncaughtExceptionHandler implements Thread.UncaughtExceptionHandler {
 
     @Override
     public void uncaughtException(Thread t, Throwable e) {
