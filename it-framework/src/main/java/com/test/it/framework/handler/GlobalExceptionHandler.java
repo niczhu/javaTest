@@ -8,6 +8,7 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.validation.BindException;
 import org.springframework.validation.BindingResult;
 import org.springframework.validation.FieldError;
+import org.springframework.web.HttpRequestMethodNotSupportedException;
 import org.springframework.web.bind.MethodArgumentNotValidException;
 import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
@@ -74,8 +75,26 @@ public class GlobalExceptionHandler {
 
     }
 
+    // 请求方法不支持
+    @ExceptionHandler(HttpRequestMethodNotSupportedException.class)
+    public void methodNotSupportedException(){
+
+
+    }
+
+
+    private boolean isAjaxRequest(HttpServletRequest request) {
+        String requestedWith = request.getHeader("x-requested-with");
+        if (requestedWith != null && requestedWith.equalsIgnoreCase("XMLHttpRequest")) {
+            return true;
+        } else {
+            return false;
+        }
+    }
+
+
     /**
-     * 异常返回
+     * json异常返回
      * @param response
      * @param output
      */
