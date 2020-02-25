@@ -1,5 +1,6 @@
 package com.test.it.framework;
 
+import com.test.it.framework.constraint.service.ValidatorService;
 import com.test.it.framework.exception.DefaultErrorCodeEnum;
 import com.test.it.framework.exception.ErrorHelper;
 import com.test.it.framework.utils.AssertUtil;
@@ -20,10 +21,16 @@ public class TestController {
 
     @Autowired
     TestService testService;
+    @Autowired
+    ValidatorService validatorService;
 
     @GetMapping(value = "/t")
-//    @ResponseBody
+    @ResponseBody
     public Object te(){
+        TestBean testBean = new TestBean();
+        testBean.setName("niczhu");
+        validatorService.validate(testBean);
+
 //        ErrorHelper.genExByCode(DefaultErrorCodeEnum.NAME_EXISTS);
         return "a";
     }

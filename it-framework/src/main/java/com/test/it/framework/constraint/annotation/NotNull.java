@@ -11,5 +11,5 @@ public @interface NotNull {
     /**
      * 属性名
      */
-    String propertyName() default "";
+    String propName() default "";
 }

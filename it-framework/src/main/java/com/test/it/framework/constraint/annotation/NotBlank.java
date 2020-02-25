@@ -10,8 +10,8 @@ import java.lang.annotation.Target;
 public @interface NotBlank {
 
     /**
-     * 属性名
+     * 属性名称
      */
-    String propertyName() default "";
+    String propName() default "";
 
 }

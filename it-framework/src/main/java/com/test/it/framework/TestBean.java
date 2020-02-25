@@ -1,14 +1,16 @@
 package com.test.it.framework;
 
+import com.test.it.framework.constraint.annotation.NotNull;
 import com.test.it.framework.utils.ToString;
 import org.hibernate.validator.constraints.NotBlank;
-
-import javax.validation.constraints.NotNull;
 
 public class TestBean extends ToString
 {
     @NotBlank
     private String name;
+
+    @NotNull
+    private String id;
 
     private int age;
 

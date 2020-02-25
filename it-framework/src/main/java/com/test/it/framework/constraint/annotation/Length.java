@@ -24,8 +24,8 @@ public @interface Length {
     int max() default -1;
 
     /**
-     * 属性值
+     * 属性名称
      * @return
      */
-    String propertyName() default "";
+    String propName() default "";
 }
