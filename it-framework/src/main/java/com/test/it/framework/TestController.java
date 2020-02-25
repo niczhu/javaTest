@@ -21,6 +21,13 @@ public class TestController {
     @Autowired
     TestService testService;
 
+    @GetMapping(value = "/t")
+//    @ResponseBody
+    public Object te(){
+//        ErrorHelper.genExByCode(DefaultErrorCodeEnum.NAME_EXISTS);
+        return "a";
+    }
+
     @GetMapping(value = "/test")
     @ResponseBody
     public Object test(@Valid @RequestBody TestBean testBean) {

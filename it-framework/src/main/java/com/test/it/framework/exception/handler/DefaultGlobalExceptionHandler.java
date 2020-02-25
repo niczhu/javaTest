@@ -1,9 +1,10 @@
-package com.test.it.framework.handler;
+package com.test.it.framework.exception.handler;
 
-import com.alibaba.fastjson.JSONObject;
 import com.test.it.framework.exception.DefaultErrorCodeEnum;
 import com.test.it.framework.exception.ErrorHelper;
 import com.test.it.framework.exception.PrjException;
+import com.test.it.framework.exception.handler.BaseExceptionHandler;
+import com.test.it.framework.utils.ResponseUtil;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.validation.BindException;
 import org.springframework.validation.BindingResult;
@@ -12,104 +13,59 @@ import org.springframework.web.HttpRequestMethodNotSupportedException;
 import org.springframework.web.bind.MethodArgumentNotValidException;
 import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
-import org.springframework.web.bind.annotation.ResponseBody;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import java.io.IOException;
-import java.io.PrintWriter;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
 @Slf4j
 @ControllerAdvice
-public class GlobalExceptionHandler {
+public class DefaultGlobalExceptionHandler extends BaseExceptionHandler {
 
-    @ExceptionHandler({MethodArgumentNotValidException.class,BindException.class})
-    @ResponseBody
+    @ExceptionHandler({MethodArgumentNotValidException.class, BindException.class})
     public void webRequestValidatorException(HttpServletRequest request, HttpServletResponse response, Object handler, MethodArgumentNotValidException ex) {
         BindingResult bindingResult = ex.getBindingResult();
         List<FieldError> fieldErrors = bindingResult.getFieldErrors();
 
         StringBuffer sb = new StringBuffer();
-        sb.append("参数");
         for (FieldError error : fieldErrors) {
             sb.append("[").append(error.getField()).append("]").append(error.getDefaultMessage());
         }
 
-        Map<String, Object> map = new HashMap<>();
-        map.put("code", DefaultErrorCodeEnum.BAD_REQUEST.getCode());
-        map.put("msg", DefaultErrorCodeEnum.BAD_REQUEST.getMsg());
-        map.put("detail", sb.toString());
-
+        Map<String, Object> rst = getResponseMap(DefaultErrorCodeEnum.BAD_REQUEST, sb.toString());
         response.setStatus(400);
-        ajaxResponseException(response,map);
+        ResponseUtil.ajaxResponseException(response, rst);
     }
 
     @ExceptionHandler(PrjException.class)
-    @ResponseBody
     public void prjException(HttpServletRequest request, HttpServletResponse response, Object handler, Exception ex) {
-        Map<String, Object> map = new HashMap<>();
-        // 非预期异常
+        Map<String, Object> resultMap = new HashMap<>();
         if (!(ex instanceof PrjException)) {
+            // 非预期异常
             try {
                 ErrorHelper.genExByCode(DefaultErrorCodeEnum.UNKNOWN);
             } catch (PrjException e1) {
                 log.error("发生非预期异常");
-                map.put("code",DefaultErrorCodeEnum.UNKNOWN.getCode());
-                map.put("msg", DefaultErrorCodeEnum.UNKNOWN.getMsg());
-                map.put("detail", ex.getMessage());
+                resultMap = getResponseMap(DefaultErrorCodeEnum.UNKNOWN, ex);
             }
             response.setStatus(400);
         } else {
             PrjException exception = (PrjException) ex;
             //TODO:未登录异常
-            map.put("code", exception.getCode());
-            map.put("msg", exception.getMessage());
-            map.put("detail", exception.getDetail());
+            resultMap = getResponseMap(exception);
             response.setStatus(exception.getCode() == DefaultErrorCodeEnum.NOT_LOGIN.getCode() ? 401 : 400);
         }
-
-        ajaxResponseException(response,map);
-
+        ResponseUtil.ajaxResponseException(response, resultMap);
     }
 
     // 请求方法不支持
     @ExceptionHandler(HttpRequestMethodNotSupportedException.class)
-    public void methodNotSupportedException(){
-
+    public void methodNotSupportedException(HttpServletRequest request, HttpServletResponse response, Object handler, Exception ex) {
+        System.out.println("-------------req method not support exp");
 
     }
 
-
-    private boolean isAjaxRequest(HttpServletRequest request) {
-        String requestedWith = request.getHeader("x-requested-with");
-        if (requestedWith != null && requestedWith.equalsIgnoreCase("XMLHttpRequest")) {
-            return true;
-        } else {
-            return false;
-        }
-    }
-
-
-    /**
-     * json异常返回
-     * @param response
-     * @param output
-     */
-    private void ajaxResponseException(HttpServletResponse response, Map<String,Object> output){
-        try {
-            response.setContentType("application/json");
-            response.setCharacterEncoding("UTF-8");
-            PrintWriter writer = response.getWriter();
-            if (writer != null) {
-                writer.write(JSONObject.toJSONString(output));
-                writer.close();
-            }
-        } catch (IOException e) {
-            log.error(e.getMessage());
-        }
-    }
 
 }
