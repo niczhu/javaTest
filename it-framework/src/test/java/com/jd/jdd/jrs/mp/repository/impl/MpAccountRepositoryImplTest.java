@@ -1,6 +1,7 @@
 package com.jd.jdd.jrs.mp.repository.impl;
 
 import com.alibaba.fastjson.JSON;
+import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.jd.jdd.jrs.mp.BaseTest;
 import com.jd.jdd.jrs.mp.dal.model.MpAccountModel;
 import com.jd.jdd.jrs.mp.repository.MpAccountRepository;
@@ -78,5 +79,13 @@ public class MpAccountRepositoryImplTest extends BaseTest {
 
         boolean b = mpAccountRepository.SaveUpdateBatchEntity(modelList);
         System.out.println("batch result => " + b);
+    }
+
+    @Test
+    public void page() {
+        MpAccountModel mpAccountModel2 = new MpAccountModel();
+//        mpAccountModel2.setId("1");
+        Page page = mpAccountRepository.page(mpAccountModel2);
+        System.out.println(JSON.toJSONString(page));
     }
 }

@@ -19,7 +19,6 @@ public class BaseExceptionHandler {
     final String DETAIL = "detail";
     final String SUCCESS = "success";
     final String RESULT = "result";
-    final String DATA = "data";
 
     public BaseExceptionHandler() {
     }

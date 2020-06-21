@@ -1,6 +1,9 @@
 package com.jd.jdd.jrs.mp.repository.impl;
 
+import com.alibaba.fastjson.JSON;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
+import com.baomidou.mybatisplus.core.metadata.IPage;
+import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.jd.jdd.jrs.mp.base.Repository.AbstractRepository;
 import com.jd.jdd.jrs.mp.dal.bean.MpAccountBean;
 import com.jd.jdd.jrs.mp.dal.mapper.MpAccountMapper;
@@ -14,6 +17,7 @@ import org.springframework.stereotype.Repository;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
+import java.util.Map;
 
 /**
  * MpAccountRepositoryImpl
@@ -43,10 +47,14 @@ public class MpAccountRepositoryImpl extends AbstractRepository<MpAccountMapper,
         QueryWrapper<MpAccountBean> wrapper = whereCondition(bean);
 
         List<MpAccountBean> beanList = mpAccountMapper.selectList(wrapper);
-
         List<MpAccountModel> modelList = convertToModels(beanList);
 
         return modelList;
+    }
+
+    @Override
+    public List<MpAccountModel> search(Map<String, Object> queryParams) {
+        return null;
     }
 
     @Override
@@ -72,14 +80,33 @@ public class MpAccountRepositoryImpl extends AbstractRepository<MpAccountMapper,
     }
 
     @Override
+    public Page page(MpAccountModel model) {
+        QueryWrapper<MpAccountBean> wrapper = whereCondition(this.objConvert(MpAccountBean.class, model));
+        Page<MpAccountBean> page = new Page<>(model.getCurrentPage(),model.getPageSize());
+
+        Page<MpAccountBean> beanPage = mpAccountMapper.selectPage(page, wrapper);
+
+        System.out.println(JSON.toJSONString(beanPage));
+
+        Page<MpAccountModel> modelPage = new Page<>();
+
+        List<MpAccountBean> records = beanPage.getRecords();
+        for (MpAccountBean record : beanPage.getRecords()) {
+
+        }
+
+        return beanPage;
+    }
+
+    @Override
     protected QueryWrapper<MpAccountBean> whereCondition(MpAccountBean bean) {
         QueryWrapper<MpAccountBean> queryWrapper = new QueryWrapper<>();
         queryWrapper.lambda().eq(StringUtils.isNotBlank(bean.getId()), MpAccountBean::getId, bean.getId());
 
         // TODO: 查询条件填充
 
-        queryWrapper.last("limit 10000");
-        System.out.println("条件查询一次最大查询1万条");
+//        queryWrapper.last("limit 10000");
+        System.out.println("条件查询一次最大查询1万条, wrapper=" + JSON.toJSONString(queryWrapper));
         return queryWrapper;
     }
 
@@ -87,7 +114,7 @@ public class MpAccountRepositoryImpl extends AbstractRepository<MpAccountMapper,
         if (null != beans && !beans.isEmpty()) {
             List<MpAccountModel> modelList = new ArrayList<>();
             for (MpAccountBean bean : beans) {
-                MpAccountModel model = this.objConvert(MpAccountModel.class,bean);
+                MpAccountModel model = this.objConvert(MpAccountModel.class, bean);
                 modelList.add(model);
             }
             return modelList;
@@ -98,8 +125,8 @@ public class MpAccountRepositoryImpl extends AbstractRepository<MpAccountMapper,
     private List<MpAccountBean> convertToBeans(List<MpAccountModel> models) {
         if (CollectionUtils.isNotEmpty(models)) {
             List<MpAccountBean> beanList = new ArrayList<>();
-            for (MpAccountModel model: models) {
-                beanList.add(this.objConvert(MpAccountBean.class,model));
+            for (MpAccountModel model : models) {
+                beanList.add(this.objConvert(MpAccountBean.class, model));
             }
             return beanList;
         }

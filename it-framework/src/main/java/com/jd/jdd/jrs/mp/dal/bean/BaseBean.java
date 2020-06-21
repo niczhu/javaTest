@@ -7,4 +7,14 @@ package com.jd.jdd.jrs.mp.dal.bean;
  * @version 1.0
  **/
 public class BaseBean {
+
+    private String id;
+
+    public String getId() {
+        return id;
+    }
+
+    public void setId(String id) {
+        this.id = id;
+    }
 }
