@@ -1,6 +1,6 @@
 package com.jd.jdd.jrs.mp.dal.mapper;
 
-import com.baomidou.mybatisplus.core.mapper.BaseMapper;
+import com.jd.jdd.jrs.mp.base.mapper.SuperMapper;
 import com.jd.jdd.jrs.mp.dal.bean.MpAccountBean;
 
 /**
@@ -11,6 +11,6 @@ import com.jd.jdd.jrs.mp.dal.bean.MpAccountBean;
  * @author zhuhaipeng6
  * @since 2020-05-11
  */
-public interface MpAccountMapper extends BaseMapper<MpAccountBean> {
+public interface MpAccountMapper extends SuperMapper<MpAccountBean> {
 
 }

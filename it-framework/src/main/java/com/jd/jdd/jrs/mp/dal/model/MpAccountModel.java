@@ -1,4 +1,4 @@
-package com.jd.jdd.jrs.mp.model;
+package com.jd.jdd.jrs.mp.dal.model;
 
 import lombok.Getter;
 import lombok.Setter;
@@ -13,7 +13,7 @@ import java.util.Date;
  **/
 @Setter
 @Getter
-public class MpAccountModel {
+public class MpAccountModel extends BaseModel{
     private String id;
     private String pin;
     private String name;

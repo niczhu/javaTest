@@ -1,4 +1,4 @@
-package com.jd.jdd.jrs.mp.model;
+package com.jd.jdd.jrs.mp.dal.model;
 
 /**
  * BaseModel

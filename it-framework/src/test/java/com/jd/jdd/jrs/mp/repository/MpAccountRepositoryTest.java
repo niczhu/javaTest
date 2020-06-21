@@ -1,10 +1,9 @@
 package com.jd.jdd.jrs.mp.repository;
 
 import com.alibaba.fastjson.JSON;
+import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.jd.jdd.jrs.mp.BaseTest;
 import com.jd.jdd.jrs.mp.dal.bean.MpAccountBean;
-import com.jd.jdd.jrs.mp.model.BaseModel;
-import com.jd.jdd.jrs.mp.model.MpAccountModel;
 import com.jd.jdd.jrs.mp.repository.impl.MpAccountRepositoryImpl;
 import org.junit.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -21,10 +20,18 @@ public class MpAccountRepositoryTest extends BaseTest {
     @Test
     public void testSave() {
         MpAccountBean mpAccount = new MpAccountBean();
-        mpAccount.setPin("zhp2");
-        mpAccount.setName("zhp2");
+//        mpAccount.setPin("zhp3");
+        mpAccount.setName("zhp3");
         mpAccount.setMobile("123456");
         mpAccount.setAge(10);
+
+        List<MpAccountBean> list = mpAccountRepository.list();
+        System.out.println(JSON.toJSONString(list));
+
+        QueryWrapper<MpAccountBean> wrapper = new QueryWrapper<MpAccountBean>().eq("pin", "zhp");
+
+        MpAccountBean one = mpAccountRepository.getOne(new QueryWrapper<MpAccountBean>().eq("pin", "zhp"));
+        System.out.println(JSON.toJSONString(one));
 
 //        boolean b = mpAccountRepository.saveOrUpdate(mpAccount);
 //        System.out.println(b);
@@ -37,8 +44,6 @@ public class MpAccountRepositoryTest extends BaseTest {
 //        System.out.println(list);
         MpAccountBean bean = new MpAccountBean();
         bean.setPin("testpin");
-        BaseModel baseModel = mpAccountRepository2.convertToVo(bean);
-        System.out.println(JSON.toJSONString(baseModel));
     }
 
 

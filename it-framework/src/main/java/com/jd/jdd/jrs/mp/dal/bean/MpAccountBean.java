@@ -1,6 +1,8 @@
 package com.jd.jdd.jrs.mp.dal.bean;
 
+import com.baomidou.mybatisplus.annotation.TableId;
 import com.baomidou.mybatisplus.annotation.TableName;
+import com.jd.jdd.jrs.it.framework.constraint.annotation.NotNull;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -16,12 +18,18 @@ import java.util.Date;
 @Getter
 @TableName("mp_account")
 public class MpAccountBean extends BaseBean {
+
     private String id;
+
+    @NotNull
     private String pin;
+
     private String name;
     private String mobile;
     private String organizationCode;
     private int age;
     private Date birthDay;
     private String status;
+
+
 }
