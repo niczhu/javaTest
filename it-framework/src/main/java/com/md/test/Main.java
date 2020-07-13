@@ -4,6 +4,7 @@ package com.md.test;
 import com.alibaba.fastjson.JSON;
 import com.md.it.test.if_else.BaseProcessor;
 import com.md.it.framework.model.TableFieldEnum;
+import com.md.mp.base.model.QueryParams;
 import com.md.mp.dal.bean.MpAccountBean;
 import com.md.mp.dal.model.MpAccountModel;
 import org.apache.commons.beanutils.PropertyUtils;
@@ -11,25 +12,6 @@ import org.apache.commons.beanutils.PropertyUtils;
 public class Main {
 
     public static void main(String[] args) throws Exception {
-        TestBean testBean = new TestBean();
-        testBean.setName("nick");
-        testBean.setAge(10);
-        System.out.println(testBean);
-        System.out.println(testBean.toString());
-
-        System.out.println(TestBeanEnum.ADMIN.getClass());
-        System.out.println(TestBeanEnum.ADMIN.getClass().isAssignableFrom(TableFieldEnum.class));
-        System.out.println(TestBeanEnum.ADMIN instanceof TableFieldEnum);
-
-        ObjectConverter<MpAccountBean, MpAccountModel> converter1 =
-                new ObjectConverter<MpAccountBean, MpAccountModel>(MpAccountBean.class, MpAccountModel.class);
-        MpAccountModel model1 = new MpAccountModel();
-        model1.setName("nic");
-        model1.setPin("pin");
-        Object convert = converter1.convert(MpAccountBean.class,model1);
-
-        System.out.println(JSON.toJSONString(convert));
-
 
     }
 

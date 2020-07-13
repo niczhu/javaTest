@@ -36,13 +36,13 @@ public class MpAccountRepositoryImplTest extends BaseTest {
     public void saveUpdateEntity() {
 
         MpAccountModel mpAccountModel = new MpAccountModel();
-        mpAccountModel.setName("1");
-        mpAccountModel.setAge(111);
+
         mpAccountModel.setBirthDay(new Date());
         mpAccountModel.setMobile("15200998876");
         mpAccountModel.setPin("pin1");
         mpAccountModel.setStatus("1");
         mpAccountModel.setId("1");
+        mpAccountModel.setName("");
 
         MpAccountModel mpAccountModel1 = mpAccountRepository.saveUpdateVo(mpAccountModel);
         System.out.println(JSON.toJSONString(mpAccountModel1));
@@ -81,7 +81,7 @@ public class MpAccountRepositoryImplTest extends BaseTest {
     @Test
     public void page() {
         MpAccountModel mpAccountModel2 = new MpAccountModel();
-//        mpAccountModel2.setId("1");
+        mpAccountModel2.setId("1");
         Page page = mpAccountRepository.page(mpAccountModel2);
         System.out.println(JSON.toJSONString(page));
     }

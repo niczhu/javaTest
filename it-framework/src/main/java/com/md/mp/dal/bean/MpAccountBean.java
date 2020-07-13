@@ -16,7 +16,9 @@ import java.util.Date;
 @Setter
 @Getter
 @TableName("mp_account")
-public class MpAccountBean extends BaseBean {
+public class MpAccountBean implements BaseBean {
+
+    private static final long serialVersionUID = -1L;
 
     private String id;
 
@@ -24,10 +26,15 @@ public class MpAccountBean extends BaseBean {
     private String pin;
 
     private String name;
+
     private String mobile;
+
     private String organizationCode;
+
     private int age;
+
     private Date birthDay;
+
     private String status;
 
 

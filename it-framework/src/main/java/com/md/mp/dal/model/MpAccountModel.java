@@ -4,6 +4,7 @@ import lombok.Getter;
 import lombok.Setter;
 import lombok.ToString;
 
+import java.io.Serializable;
 import java.util.Date;
 
 /**
@@ -15,13 +16,27 @@ import java.util.Date;
 @Setter
 @Getter
 @ToString
-public class MpAccountModel extends BaseModel{
+public class MpAccountModel extends AbstractModel implements BaseModel, Serializable {
+    private static final long serialVersionUID = -1L;
+
     private String id;
+
     private String pin;
+
     private String name;
+
     private String mobile;
+
     private String organizationCode;
+
     private int age;
+
     private Date birthDay;
+
     private String status;
+
+    private long currentPage = 0;
+
+    private long pageSize = 100;
+
 }

@@ -29,9 +29,11 @@ public class MpAccountRepositoryImpl extends AbstractRepository<MpAccountMapper,
     @Override
     public MpAccountModel getVoById(String id) {
         // TODO: 参数合法性检验
+
         MpAccountBean bean = getById(id);
         return ConverterUtil.objConvert(MpAccountModel.class, bean);
     }
+
 
     @Override
     public Page page(MpAccountModel model) {
@@ -43,6 +45,7 @@ public class MpAccountRepositoryImpl extends AbstractRepository<MpAccountMapper,
         return modelPage.setRecords(ConverterUtil.objConvertList(MpAccountModel.class, beanPage.getRecords()));
     }
 
+
     @Override
     public List<MpAccountModel> search(MpAccountModel accountModel) {
         // TODO: 参数合法性检验
@@ -53,9 +56,17 @@ public class MpAccountRepositoryImpl extends AbstractRepository<MpAccountMapper,
     }
 
     @Override
+    public List<MpAccountModel> search(Map<String, Object> queryParams) {
+        List<MpAccountBean> mpAccountBeans = mpAccountMapper.selectByMap(queryParams);
+        return null;
+    }
+
+
+    @Override
     public MpAccountModel saveUpdateVo(MpAccountModel accountModel) {
         // TODO: 参数合法性检验
         //TODO 初始化属性值
+
         MpAccountBean bean = ConverterUtil.objConvert(MpAccountBean.class, accountModel);
         boolean b = saveOrUpdate(bean);
         if (b) {
@@ -68,21 +79,14 @@ public class MpAccountRepositoryImpl extends AbstractRepository<MpAccountMapper,
     @Override
     public boolean SaveUpdateBatchVo(List<MpAccountModel> accountModels) {
         // TODO: 参数合法性检验
-        //TODO 初始化属性值
+
         return saveOrUpdateBatch(ConverterUtil.objConvertList(MpAccountBean.class, accountModels));
     }
 
-    @Override
-    public List<MpAccountModel> search(Map<String, Object> queryParams) {
-        return null;
-    }
-
-    @Override
     protected QueryWrapper<MpAccountBean> whereCondition(MpAccountModel model) {
         QueryWrapper<MpAccountBean> queryWrapper = baseWhereCondition(model);
 
         // TODO: 查询条件填充
-//        queryWrapper.orderBy()
 
         // 置后
         if (model.getPageSize() == 0) {

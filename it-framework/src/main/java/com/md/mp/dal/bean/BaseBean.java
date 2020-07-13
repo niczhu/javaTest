@@ -8,15 +8,8 @@ import java.io.Serializable;
  * @author zhuhaipeng6 in 2020/5/11 15:39
  * @version 1.0
  **/
-public class BaseBean implements Serializable {
+public interface BaseBean extends Serializable {
 
-    private String id;
+    String getId();
 
-    public String getId() {
-        return id;
-    }
-
-    public void setId(String id) {
-        this.id = id;
-    }
 }

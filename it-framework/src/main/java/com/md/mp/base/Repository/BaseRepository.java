@@ -7,13 +7,13 @@ import com.baomidou.mybatisplus.extension.service.IService;
 import java.util.List;
 import java.util.Map;
 
-public interface BaseRepository<T,V> extends IService<T> {
+public interface BaseRepository<T, V> extends IService<T> {
 
     V getVoById(String id);
 
     List<V> search(V v);
 
-    List<V> search(Map<String,Object> queryParams);
+    List<V> search(Map<String, Object> queryParams);
 
     V saveUpdateVo(V v);
 

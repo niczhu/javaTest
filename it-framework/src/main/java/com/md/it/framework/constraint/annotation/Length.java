@@ -11,7 +11,6 @@ import java.lang.annotation.Target;
  * @author zhuhaipeng6 in 2020/2/25 22:52
  * @version 1.0
  **/
-
 @Retention(RetentionPolicy.RUNTIME)
 @Target(ElementType.FIELD)
 public @interface Length {

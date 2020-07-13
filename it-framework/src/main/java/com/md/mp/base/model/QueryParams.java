@@ -1,8 +1,7 @@
 package com.md.mp.base.model;
 
-import lombok.Builder;
-import lombok.Getter;
-import lombok.Setter;
+import java.util.HashMap;
+import java.util.Map;
 
 /**
  * QueryParams
@@ -10,12 +9,39 @@ import lombok.Setter;
  * @author zhuhaipeng6 in 2020/7/10 17:52
  * @version 1.0
  **/
-@Builder
-@Getter
-@Setter
 public class QueryParams {
 
-    private String currentPage;
+    private Map<String, Object> values = new HashMap<>();
 
-    private String pageSize;
+    public QueryParams() {
+    }
+
+    public static QueryParams builder() {
+        return new QueryParams();
+    }
+
+    public QueryParams start(int start) {
+        this.values.put("start", start);
+        return this;
+    }
+
+    public QueryParams limit(int limit) {
+        this.values.put("limit", limit);
+        return this;
+    }
+
+    public Map<String, Object> build() {
+        return this.values;
+    }
+
+    public QueryParams clear() {
+        this.values.clear();
+        return this;
+    }
+
+    public String toString(){
+        return this.values.toString();
+    }
+
+
 }
