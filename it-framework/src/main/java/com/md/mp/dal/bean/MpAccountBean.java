@@ -1,9 +1,12 @@
 package com.md.mp.dal.bean;
 
-import com.baomidou.mybatisplus.annotation.TableName;
+import com.baomidou.mybatisplus.annotation.*;
 import com.md.it.framework.constraint.annotation.NotNull;
+import com.md.mp.base.model.AbstractBean;
+import com.md.mp.base.model.BaseBean;
 import lombok.Getter;
 import lombok.Setter;
+import org.apache.ibatis.annotations.Options;
 
 import java.util.Date;
 
@@ -16,11 +19,12 @@ import java.util.Date;
 @Setter
 @Getter
 @TableName("mp_account")
-public class MpAccountBean implements BaseBean {
+public class MpAccountBean extends AbstractBean implements BaseBean {
 
     private static final long serialVersionUID = -1L;
 
-    private String id;
+    @TableId(value = "id", type = IdType.AUTO)
+    private long id;
 
     @NotNull
     private String pin;

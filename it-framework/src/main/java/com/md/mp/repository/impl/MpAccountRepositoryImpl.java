@@ -1,5 +1,6 @@
 package com.md.mp.repository.impl;
 
+import com.alibaba.fastjson.JSON;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.md.mp.base.Repository.AbstractRepository;
@@ -9,6 +10,7 @@ import com.md.mp.dal.model.MpAccountModel;
 import com.md.mp.repository.MpAccountRepository;
 import com.md.mp.utils.ConverterUtil;
 import org.apache.commons.lang3.StringUtils;
+import org.apache.ibatis.annotations.Options;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
@@ -69,12 +71,19 @@ public class MpAccountRepositoryImpl extends AbstractRepository<MpAccountMapper,
 
         MpAccountBean bean = ConverterUtil.objConvert(MpAccountBean.class, accountModel);
         boolean b = saveOrUpdate(bean);
-        if (b) {
+        System.out.println("bean=>" + JSON.toJSONString(bean));
+        if (b && null != bean) {
+            accountModel.setId(bean.getId());
             return accountModel;
         }
         System.out.println("save exp");
         return null;
     }
+
+//    @Options(useGeneratedKeys = true, keyProperty = "id", keyColumn = "id")
+//    public boolean save(MpAccountBean bean) {
+//        return saveOrUpdate(bean);
+//    }
 
     @Override
     public boolean SaveUpdateBatchVo(List<MpAccountModel> accountModels) {
@@ -104,7 +113,7 @@ public class MpAccountRepositoryImpl extends AbstractRepository<MpAccountMapper,
 
         // TODO: 基本查询条件填充
         queryWrapper.lambda()
-                .eq(StringUtils.isNotEmpty(model.getId()), MpAccountBean::getId, model.getId())
+                .eq(model.getId() >= 0, MpAccountBean::getId, model.getId())
                 .eq(StringUtils.isNotEmpty(model.getPin()), MpAccountBean::getPin, model.getPin())
                 .eq(StringUtils.isNotEmpty(model.getName()), MpAccountBean::getName, model.getName());
 

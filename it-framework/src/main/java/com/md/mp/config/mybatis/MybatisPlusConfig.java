@@ -1,4 +1,4 @@
-package com.md.mp.config;
+package com.md.mp.config.mybatis;
 
 import com.baomidou.mybatisplus.extension.plugins.OptimisticLockerInterceptor;
 import com.baomidou.mybatisplus.extension.plugins.PaginationInterceptor;
@@ -35,7 +35,7 @@ public class MybatisPlusConfig {
      * @return
      */
     @Bean
-    public OptimisticLockerInterceptor optimisticLocker() {
+    public OptimisticLockerInterceptor optimisticLockerInterceptor() {
         return new OptimisticLockerInterceptor();
     }
 

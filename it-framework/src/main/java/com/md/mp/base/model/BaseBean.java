@@ -1,4 +1,4 @@
-package com.md.mp.dal.bean;
+package com.md.mp.base.model;
 
 import java.io.Serializable;
 
@@ -10,6 +10,6 @@ import java.io.Serializable;
  **/
 public interface BaseBean extends Serializable {
 
-    String getId();
+    long getId();
 
 }

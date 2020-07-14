@@ -4,8 +4,8 @@ import com.md.it.framework.constraint.annotation.Length;
 import com.md.it.framework.constraint.annotation.NotBlank;
 import com.md.it.framework.constraint.annotation.NotNull;
 import com.md.it.framework.constraint.validator.LengthValidator;
-import com.md.it.framework.constraint.validator.NotNullValidator;
 import com.md.it.framework.constraint.validator.NotBlankValidator;
+import com.md.it.framework.constraint.validator.NotNullValidator;
 import com.md.it.framework.constraint.validator.Validator;
 
 import java.lang.annotation.Annotation;
@@ -21,16 +21,21 @@ import java.util.concurrent.ConcurrentHashMap;
  **/
 public class ValidatorServiceImpl implements ValidatorService {
 
-    private static final Map<Class<?>, Validator<?>> map = new ConcurrentHashMap();
+    private static final Map<Class<?>, Validator<?>> validatorMap = new ConcurrentHashMap();
 
     static {
-        map.put(NotNull.class,new NotNullValidator());
-        map.put(NotBlank.class,new NotBlankValidator());
-        map.put(Length.class,new LengthValidator());
+        validatorMap.put(NotNull.class, new NotNullValidator());
+        validatorMap.put(NotBlank.class, new NotBlankValidator());
+        validatorMap.put(Length.class, new LengthValidator());
     }
 
     public ValidatorServiceImpl() {
     }
+
+    public static Map<Class<?>, Validator<?>> getValidatorMap() {
+        return validatorMap;
+    }
+
 
     @Override
     public void validate(Object obj) {
@@ -47,12 +52,13 @@ public class ValidatorServiceImpl implements ValidatorService {
 
             for (int j = 0; j < annoLen; j++) {
                 Annotation anno = annos[j];
-                Validator<?> validator =(Validator) map.get(anno.annotationType());
-                if(null != validator){
-                    validator.validate(obj,field);
+                Validator<?> validator = (Validator) validatorMap.get(anno.annotationType());
+                if (null != validator) {
+                    validator.validate(obj, field);
                 }
             }
 
         }
     }
+
 }

@@ -1,5 +1,7 @@
 package com.md.mp.dal.model;
 
+import com.md.mp.base.model.AbstractModel;
+import com.md.mp.base.model.BaseModel;
 import lombok.Getter;
 import lombok.Setter;
 import lombok.ToString;
@@ -16,10 +18,11 @@ import java.util.Date;
 @Setter
 @Getter
 @ToString
-public class MpAccountModel extends AbstractModel implements BaseModel, Serializable {
+public class MpAccountModel extends AbstractModel implements BaseModel{
+
     private static final long serialVersionUID = -1L;
 
-    private String id;
+    private long id;
 
     private String pin;
 
@@ -35,8 +38,16 @@ public class MpAccountModel extends AbstractModel implements BaseModel, Serializ
 
     private String status;
 
-    private long currentPage = 0;
+    private int version;
 
-    private long pageSize = 100;
+    private int deleteFlag;
+
+    private String modifiedBy;
+
+    private Date modifiedTime;
+
+    private String createdBy;
+
+    private Date createdTime;
 
 }

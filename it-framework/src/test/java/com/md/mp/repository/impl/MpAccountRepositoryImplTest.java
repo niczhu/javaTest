@@ -27,7 +27,7 @@ public class MpAccountRepositoryImplTest extends BaseTest {
     @Test
     public void search() {
         MpAccountModel mpAccountModel = new MpAccountModel();
-        mpAccountModel.setId("1");
+        mpAccountModel.setId(1);
         List<MpAccountModel> search1 = mpAccountRepository.search(mpAccountModel);
         System.out.println(JSON.toJSONString(search1));
     }
@@ -41,11 +41,12 @@ public class MpAccountRepositoryImplTest extends BaseTest {
         mpAccountModel.setMobile("15200998876");
         mpAccountModel.setPin("pin1");
         mpAccountModel.setStatus("1");
-        mpAccountModel.setId("1");
-        mpAccountModel.setName("");
+//        mpAccountModel.setId("1");
+        mpAccountModel.setName("1");
 
         MpAccountModel mpAccountModel1 = mpAccountRepository.saveUpdateVo(mpAccountModel);
-        System.out.println(JSON.toJSONString(mpAccountModel1));
+
+        System.out.println("返回DB=>"+JSON.toJSONString(mpAccountModel1));
 
     }
 
@@ -59,7 +60,7 @@ public class MpAccountRepositoryImplTest extends BaseTest {
         mpAccountModel.setMobile("15200998876");
         mpAccountModel.setPin("pin1");
         mpAccountModel.setStatus("1");
-        mpAccountModel.setId("1");
+        mpAccountModel.setId(1);
 
         //
         MpAccountModel mpAccountModel2 = new MpAccountModel();
@@ -81,7 +82,7 @@ public class MpAccountRepositoryImplTest extends BaseTest {
     @Test
     public void page() {
         MpAccountModel mpAccountModel2 = new MpAccountModel();
-        mpAccountModel2.setId("1");
+        mpAccountModel2.setId(2);
         Page page = mpAccountRepository.page(mpAccountModel2);
         System.out.println(JSON.toJSONString(page));
     }
