@@ -1,7 +1,8 @@
 package com.md.it.framework.constraint.validator;
 
-import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.lang3.reflect.FieldUtils;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import java.lang.annotation.Annotation;
 import java.lang.reflect.Field;
@@ -12,8 +13,9 @@ import java.lang.reflect.Field;
  * @author zhuhaipeng6 in 2020/2/25
  * @version 1.0
  **/
-@Slf4j
 public abstract class AbstractValidator<T, VT> implements Validator {
+    Logger logger = LoggerFactory.getLogger(AbstractValidator.class);
+
     public AbstractValidator() {
     }
 
@@ -25,8 +27,7 @@ public abstract class AbstractValidator<T, VT> implements Validator {
             VT value = (VT) FieldUtils.readField(field, obj, true);
             this.doValidate(value, (T) annotation, field.getName());
         } catch (IllegalAccessException | IllegalArgumentException e) {
-            log.error("Validator exception:" + e.getMessage());
-            e.printStackTrace();
+            logger.error("Validator exception {}", e.getMessage(), e);
         }
     }
 

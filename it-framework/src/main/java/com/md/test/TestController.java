@@ -4,22 +4,27 @@ import com.md.it.framework.constraint.service.ValidatorService;
 import com.md.it.framework.exception.DefaultErrorCodeEnum;
 import com.md.it.framework.exception.UncaughtExceptionHandler;
 import com.md.it.framework.utils.AssertUtil;
+import io.swagger.annotations.Api;
+import io.swagger.annotations.ApiOperation;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
 
-@Controller
+@Api(tags = "标签接口", value = "标签管理")
+@RestController
+@RequestMapping("/")
 public class TestController {
-
+    Logger logger = LoggerFactory.getLogger("com.md.test.web");
     @Autowired
     TestService testService;
     @Autowired
     ValidatorService validatorService;
-    @Autowired
-    UncaughtExceptionHandler uncaughtExceptionHandler;
 
+    @ApiOperation(value = "根据id查询", notes = "整型且必需")
     @GetMapping(value = "/hello")
     public Object hello() {
         return "hello world";
@@ -29,13 +34,12 @@ public class TestController {
     @ResponseBody
     public Object te() {
         TestBean testBean = new TestBean();
-        testBean.setName("niczhu");
+//        testBean.setName("niczhu");
         testBean.setId("12");
         testBean.setAge(9);
         testBean.setTestBean(TestBeanEnum.ADMIN);
 
         validatorService.validate(testBean);
-
 //        ErrorHelper.genExByCode(DefaultErrorCodeEnum.NAME_EXISTS);
         return testBean;
     }
@@ -55,27 +59,8 @@ public class TestController {
         TestBean testBean1 = new TestBean();
         testBean1.setAge(10);
         testBean1.setName("测试姓名");
+        AssertUtil.notNull(null,DefaultErrorCodeEnum.MISS_PARAMETER);
         return testBean1;
     }
 
-    @GetMapping(value = "/utf")
-    @ResponseBody
-    public Object testUtf() {
-        return "测试";
-    }
-
-    @GetMapping(value = "/uncaught")
-    @ResponseBody
-    public Object uncaught() {
-        Thread thread = new Thread(new Runnable() {
-            @Override
-            public void run() {
-                System.out.println(".aaaaaaaaaaaaaaaaaaa");
-                int i = 100/0;
-            }
-        });
-        thread.setUncaughtExceptionHandler(uncaughtExceptionHandler);
-        thread.start();
-        throw new NullPointerException("test null exp");
-    }
 }

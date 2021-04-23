@@ -9,6 +9,6 @@ import org.springframework.web.bind.annotation.ControllerAdvice;
  * @author zhuhaipeng6 in 2020/4/11 21:07
  * @version 1.0
  **/
-@ControllerAdvice
+@ControllerAdvice(basePackages = "com.md.test")
 public class MyExceptionHandler extends DefaultPrjExceptionHandler {
 }

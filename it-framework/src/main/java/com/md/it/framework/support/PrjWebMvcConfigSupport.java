@@ -1,6 +1,7 @@
 package com.md.it.framework.support;
 
 import com.md.it.framework.support.converter.PrjJsonHttpMessageConverter;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
 import org.springframework.http.converter.HttpMessageConverter;
 import org.springframework.http.converter.StringHttpMessageConverter;
@@ -11,9 +12,10 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class PrjWebMvcConfigSupport extends WebMvcConfigurationSupport {
-
+    @Autowired
+    private SupportProperties supportProperties;
     /**
-     * 解决controller中@responseBody返回中文字符串乱码问题
+     * 解决序列化返回中文字符串乱码问题
      *
      * @param
      */
@@ -41,7 +43,7 @@ public class PrjWebMvcConfigSupport extends WebMvcConfigurationSupport {
         fastMediaTypeList.add(MediaType.APPLICATION_JSON_UTF8);
 
         //在convert中添加配置信息
-        PrjJsonHttpMessageConverter defaultJsonHttpMessageConverter = new PrjJsonHttpMessageConverter();
+        PrjJsonHttpMessageConverter defaultJsonHttpMessageConverter = new PrjJsonHttpMessageConverter(supportProperties);
         defaultJsonHttpMessageConverter.setSupportedMediaTypes(fastMediaTypeList);
 
         HttpMessageConverter<?> converter = defaultJsonHttpMessageConverter;

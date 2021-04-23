@@ -7,42 +7,50 @@ import java.util.Map;
 
 /**
  * ToString
+ *
  * @author zhuhaipeng6 in 2020/2/25
  * @version 1.0
  **/
 public class ToString implements Serializable {
 
     private static final long serialVersionUID = -7187454415838423368L;
+    /**
+     * 缓存
+     */
     private static Map<Class<?>, Field[]> filedMap = new HashMap();
+    /**
+     * 序列化常量key
+     */
+    private final String SERIAL_VERSION_UID = "serialVersionUID";
 
     public ToString() {
     }
 
     public String toString() {
-        Field[] fileds = null;
+        Field[] fields = null;
         int i;
         if (filedMap.containsKey(this.getClass())) {
-            fileds = (Field[])filedMap.get(this.getClass());
+            fields = (Field[]) filedMap.get(this.getClass());
         } else {
-            fileds = this.getClass().getDeclaredFields();
-            Field[] var2 = fileds;
-            i = fileds.length;
+            fields = this.getClass().getDeclaredFields();
+            Field[] fields2 = fields;
+            i = fields.length;
 
-            for(int var4 = 0; var4 < i; ++var4) {
-                Field field = var2[var4];
+            for (int j = 0; j < i; ++j) {
+                Field field = fields2[j];
                 field.setAccessible(true);
             }
         }
 
         StringBuffer sb = new StringBuffer("{");
 
-        for(i = 0; i < fileds.length; ++i) {
-            Field field = fileds[i];
-            if (!field.getName().equals("serialVersionUID")) {
+        for (i = 0; i < fields.length; ++i) {
+            Field field = fields[i];
+            if (!field.getName().equals(SERIAL_VERSION_UID)) {
                 try {
                     Object value = field.get(this);
                     sb.append(String.format("%s: %s", field.getName(), value));
-                    if (i != fileds.length - 1) {
+                    if (i != fields.length - 1) {
                         sb.append(", ");
                     }
                 } catch (IllegalArgumentException e1) {

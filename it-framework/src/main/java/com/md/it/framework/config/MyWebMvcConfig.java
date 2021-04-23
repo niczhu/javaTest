@@ -2,6 +2,7 @@ package com.md.it.framework.config;
 
 import com.md.it.framework.support.PrjWebMvcConfigSupport;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.web.servlet.config.annotation.ResourceHandlerRegistry;
 
 /**
  * MyWebMvcConfig
@@ -11,4 +12,15 @@ import org.springframework.context.annotation.Configuration;
  **/
 @Configuration
 public class MyWebMvcConfig extends PrjWebMvcConfigSupport {
+
+    @Override
+    protected void addResourceHandlers(ResourceHandlerRegistry registry) {
+        super.addResourceHandlers(registry);
+        registry.addResourceHandler("swagger-ui.html")
+                .addResourceLocations("classpath:/META-INF/resources/");
+
+        registry.addResourceHandler("/webjars/**")
+                .addResourceLocations("classpath:/META-INF/resources/webjars/");
+    }
+
 }

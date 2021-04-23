@@ -10,19 +10,21 @@ import java.lang.reflect.Type;
 /**
  * TableFieldEnumSerializer
  *
- * @author zhuhaipeng6 in 2020/2/26 17:30
+ * @author zhuhaipeng6 in 2020/07/12 23:30
  * @version 1.0
  **/
 public class TableFieldEnumSerializer extends EnumSerializer {
-    static {
-        System.out.println("加载 TableFieldEnumSerializer");
-    }
+
     public TableFieldEnumSerializer() {
     }
 
     public void write(JSONSerializer serializer, Object object, Object fieldName, Type fieldType, int features) throws IOException {
         super.write(serializer, object, fieldName, fieldType, features);
-        serializer.getWriter().writeFieldValue(',', String.format("%sDesc", fieldName), ((TableFieldEnum) object).getDesc());
+
+        if (fieldType.getClass().isInstance(TableFieldEnum.class)) {
+            serializer.getWriter().writeFieldValue(',', String.format("%sDesc", fieldName), ((TableFieldEnum) object).getDesc());
+        }
+
     }
 
 }

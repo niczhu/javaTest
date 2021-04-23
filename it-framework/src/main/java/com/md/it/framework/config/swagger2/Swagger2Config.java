@@ -18,6 +18,7 @@ import springfox.documentation.service.ApiInfo;
 import springfox.documentation.service.Parameter;
 import springfox.documentation.spi.DocumentationType;
 import springfox.documentation.spring.web.plugins.Docket;
+import springfox.documentation.swagger2.annotations.EnableSwagger2;
 import springfox.documentation.swagger2.configuration.Swagger2DocumentationConfiguration;
 
 import java.util.ArrayList;
@@ -28,65 +29,30 @@ import java.util.List;
  * @Author TuMingLong
  * @Date 2019/11/1 11:57
  */
-@Slf4j
 @Configuration
-@EnableConfigurationProperties({HdwSwaggerProperties.class})
-@ConditionalOnProperty(prefix = "hdw.swagger2", name = "enabled", havingValue = "true")
-@Import({Swagger2DocumentationConfiguration.class})
+@EnableSwagger2
 public class Swagger2Config {
-
-    private HdwSwaggerProperties hdwSwaggerProperties;
-    /*token*/
-    private final String JWT_DEFAULT_TOKEN_NAME = "token";
-    private Predicate<RequestHandler> package1 = RequestHandlerSelectors.basePackage("com.md.xxx");
-    private Predicate<RequestHandler> package2 = RequestHandlerSelectors.basePackage("com.md.yyyy");
-
-    public Swagger2Config(HdwSwaggerProperties hdwSwaggerProperties) {
-        this.hdwSwaggerProperties = hdwSwaggerProperties;
-        log.debug("swagger2 [{}]", hdwSwaggerProperties);
-    }
 
     @Bean
     public Docket createRestApi() {
         return new Docket(DocumentationType.SWAGGER_2)
                 .apiInfo(apiInfo())
                 .select()
-                .apis(RequestHandlerSelectors.withMethodAnnotation(ApiOperation.class))
-//                .apis(Predicates.or(package1,package2))
+                .apis(RequestHandlerSelectors.basePackage("com.md.test"))
                 .paths(PathSelectors.any())
-                .build()
-                // 或
-                .globalOperationParameters(setHeaderToken());
+                .build();
     }
 
     private ApiInfo apiInfo() {
         return new ApiInfoBuilder()
                 // 文档标题
-                .title(hdwSwaggerProperties.getTitle())
+                .title("title")
                 // 文档描述
-                .description(hdwSwaggerProperties.getDescription())
-                .version(hdwSwaggerProperties.getVersion())
+                .description("xxxx")
+                .version("2.0")
                 .license("MIT 协议")
                 .licenseUrl("http://www.opensource.org/licenses/MIT")
                 .build();
-    }
-
-    private List<Parameter> setHeaderToken() {
-        List<Parameter> pars = new ArrayList<>();
-
-        // token请求头
-        String testTokenValue = "";
-        ParameterBuilder tokenPar = new ParameterBuilder();
-        Parameter tokenParameter = tokenPar
-                .name(JWT_DEFAULT_TOKEN_NAME)
-                .description("Token Request Header")
-                .modelRef(new ModelRef("string"))
-                .parameterType("header")
-                .required(false)
-                .defaultValue(testTokenValue)
-                .build();
-        pars.add(tokenParameter);
-        return pars;
     }
 
 }

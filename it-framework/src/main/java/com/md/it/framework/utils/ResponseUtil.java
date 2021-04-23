@@ -28,6 +28,7 @@ public class ResponseUtil {
             response.setContentType("application/json");
             response.setCharacterEncoding("UTF-8");
             PrintWriter writer = response.getWriter();
+            System.out.println("output:==> "+ output);
             if (writer != null) {
                 writer.write(JSONObject.toJSONString(output));
                 writer.close();

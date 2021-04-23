@@ -16,11 +16,9 @@ public class LengthValidator extends AbstractValidator<Length, Integer> {
     void doValidate(Integer fieldValue, Length annotation, String fieldName) {
         String propName = StringUtils.isNotBlank(annotation.propName()) ? annotation.propName() : fieldName;
 
-        /**
-             if (fieldValue <= 0) {
-             ErrorHelper.genExByCode(DefaultErrorCodeEnum.INVALID_PARAM, String.format("%s不能为空", propName));
-             }
-         */
+        if (null == fieldValue || fieldValue <= 0) {
+            ErrorHelper.genExByCode(DefaultErrorCodeEnum.INVALID_PARAM, String.format("%s不能为空", propName));
+        }
 
         if (annotation.value() > 0) {
             if (annotation.value() != String.valueOf(fieldValue).length()) {

@@ -11,17 +11,17 @@ import org.apache.commons.lang3.StringUtils;
  * @author zhuhaipeng6 in 2020/2/26 10:34
  * @version 1.0
  **/
-public class NotBlankValidator extends AbstractValidator<NotBlank, Object> {
+public class NotBlankValidator extends AbstractValidator<NotBlank, String> {
     @Override
-    void doValidate(Object fieldValue, NotBlank annotation, String fieldName) {
-        if (StringUtils.isBlank(String.valueOf(fieldValue))) {
+    void doValidate(String fieldValue, NotBlank annotation, String fieldName) {
+        if (StringUtils.isBlank(fieldValue)) {
             String propName = StringUtils.isBlank(annotation.propName()) ? fieldName : annotation.propName();
             ErrorHelper.genExByCode(DefaultErrorCodeEnum.INVALID_PARAM, String.format("%s不能为空", propName));
         }
     }
 
     @Override
-    public Class support() {
+    public Class<NotBlank> support() {
         return NotBlank.class;
     }
 }

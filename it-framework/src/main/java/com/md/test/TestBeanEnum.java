@@ -4,25 +4,24 @@ import com.md.it.framework.model.TableFieldEnum;
 
 public enum TestBeanEnum implements TableFieldEnum {
 
-    ADMIN("10","管理");
-
-    ;
+    ADMIN("10", "管理");;
 
     private String code;
     private String desc;
 
-    private TestBeanEnum(String code,String desc){
+    private TestBeanEnum(String code, String desc) {
         this.code = code;
         this.desc = desc;
     }
+
     @Override
     public String getDesc() {
-        return null;
+        return this.desc;
     }
 
     @Override
     public String getCode() {
-        return null;
+        return this.code;
     }
 
     public void setCode(String code) {

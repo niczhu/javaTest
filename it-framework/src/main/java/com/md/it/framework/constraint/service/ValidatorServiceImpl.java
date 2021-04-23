@@ -21,7 +21,7 @@ import java.util.concurrent.ConcurrentHashMap;
  **/
 public class ValidatorServiceImpl implements ValidatorService {
 
-    private static final Map<Class<?>, Validator<?>> validatorMap = new ConcurrentHashMap();
+    private static final Map<Class<?>, Validator<?>> validatorMap = new ConcurrentHashMap<>();
 
     static {
         validatorMap.put(NotNull.class, new NotNullValidator());
