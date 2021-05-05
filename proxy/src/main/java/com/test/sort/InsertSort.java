@@ -1,26 +1,27 @@
 package com.test.sort;
 
+import com.alibaba.fastjson.JSON;
+
 public class InsertSort {
 
-    private static int[] aArr={3,4,1,5,2};
+    private static int[] aArr = {3, 4, 1, 5, 2};
 
     /**
      * 查入排序
      * <p> O(n^2) </p>
-     *
      */
-    public static void doInsertSort(){
+    public static void doInsertSort() {
 
-        for (int i = 1,len = aArr.length; i < len; i++) {  //每次插入的值(要比较的值)
+        for (int i = 1, len = aArr.length; i < len; i++) {  //每次插入的值(要比较的值)
 
-            for(int j = i; j > 0; j--){
+            for (int j = i; j > 0; j--) {
 
                 // j-1 => 已经排好序的数组的最大值; j=>将要插入的值
-                if(aArr[j] < aArr[j-1]){
+                if (aArr[j] < aArr[j - 1]) {
                     int temp = aArr[j];
-                    aArr[j] =  aArr[j-1];
-                    aArr[j-1] = temp;
-                }else{
+                    aArr[j] = aArr[j - 1];
+                    aArr[j - 1] = temp;
+                } else {
                     break;
                 }
             }
@@ -37,8 +38,6 @@ public class InsertSort {
 
     public static void main(String[] args) {
         doInsertSort();
-        for (int i : aArr) {
-            System.out.println(i);
-        }
+        System.out.println(JSON.toJSONString(aArr));
     }
 }
