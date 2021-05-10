@@ -24,7 +24,6 @@ public class QuickSort {
 
     public static int getBase(int[] arr, int left, int right) {
         int base = arr[left];
-        System.out.println("base=" + base);
 
         while (left != right) {
             while (left < right && arr[right] >= base) {
