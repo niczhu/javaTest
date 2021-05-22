@@ -14,7 +14,9 @@ public class BuildTreeByPreMid extends TreeBuilder {
      * @param args
      */
     public static void main(String[] args) {
-
+        String v = "harara";
+        System.out.println(v.getBytes().length);
+        ThreadLocal<Object> th = new ThreadLocal<>();
     }
 
     public TreeNode buildTree(int[] preorder, int[] inorder) {
@@ -44,32 +46,6 @@ public class BuildTreeByPreMid extends TreeBuilder {
         // 先序遍历中「从 左边界+1+左子树节点数目 开始到 右边界」的元素就对应了中序遍历中「从 根节点定位+1 到 右边界」的元素
         root.right = buildChildTree(preorder, inorder, preLeft + leftTreeCount + 1, preRight, inRoot + 1, inRight);
         return root;
-    }
-
-
-    public static TreeNode getLeft(int[] preorder, int[] inorder, int preRootIndex, int inRootIndex, int leftCount, int rightCount) {
-        if (leftCount <= 1 && rightCount <= 1) return null;
-
-        TreeNode root = new TreeNode(preorder[preRootIndex]);
-
-        int newPreRootIndex = preRootIndex + 1;
-        int newInRootIndex = getInOrderMap(inorder).get(preorder[newPreRootIndex]);
-        int newRightCount = inRootIndex - newInRootIndex;
-        int newLeftCount = newInRootIndex;
-
-        TreeNode left = getLeft(preorder, inorder, newPreRootIndex, newInRootIndex, newLeftCount, newRightCount);
-
-        return root;
-
-    }
-
-
-    public static Map<Integer, Integer> getInOrderMap(int[] inOder) {
-        Map<Integer, Integer> map = new HashMap<>();
-        for (int i = 0; i < inOder.length; i++) {
-            map.put(inOder[i], i);
-        }
-        return map;
     }
 
 

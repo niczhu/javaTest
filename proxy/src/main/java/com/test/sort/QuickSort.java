@@ -2,16 +2,32 @@ package com.test.sort;
 
 import com.alibaba.fastjson.JSON;
 
+import java.util.HashMap;
 import java.util.Hashtable;
+import java.util.concurrent.CountDownLatch;
+import java.util.concurrent.CyclicBarrier;
+import java.util.concurrent.Semaphore;
 
 public class QuickSort {
 
     private static int[] data = {3, 5, 2, 1, 4, 10};
 
-    public static void main(String[] args) {
+    public static void main(String[] args) throws InterruptedException {
         doQuick(data, 0, data.length - 1);
 //        getBase(data, 0, data.length - 1);
         System.out.println(JSON.toJSONString(data));
+        HashMap<Object, Object> objectObjectHashMap = new HashMap<>();
+
+        Semaphore semaphore = new Semaphore(1);
+        semaphore.acquire();
+        semaphore.release();
+        CountDownLatch countDownLatch = new CountDownLatch(4);
+        countDownLatch.await();
+        countDownLatch.countDown();
+
+        CyclicBarrier cyclicBarrier = new CyclicBarrier(2);
+
+
     }
 
     public static void doQuick(int[] arr, int left, int right) {

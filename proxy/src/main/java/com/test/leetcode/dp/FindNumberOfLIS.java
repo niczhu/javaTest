@@ -1,4 +1,4 @@
-package com.test.leetcode.arr;
+package com.test.leetcode.dp;
 
 import com.alibaba.fastjson.JSON;
 
@@ -11,6 +11,9 @@ public class FindNumberOfLIS {
         int[] nums = {2, 2, 2, 2, 2};
 
         System.out.println(findNumberOfLIS(nums));
+
+        int s = (4+3+1)/2;
+        System.out.println(s);
 
     }
 

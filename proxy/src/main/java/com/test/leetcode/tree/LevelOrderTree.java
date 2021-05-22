@@ -6,6 +6,7 @@ import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Queue;
+import java.util.concurrent.CyclicBarrier;
 
 /**
  * 二叉树层序遍历
@@ -43,7 +44,6 @@ public class LevelOrderTree extends TreeBuilder {
                     q.offer(cur.right);
                 }
             }
-
             rest.add(levelList);
         }
         return rest;
